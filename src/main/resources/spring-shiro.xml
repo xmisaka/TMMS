@@ -44,6 +44,8 @@
         <property name="unauthorizedUrl" value="/login"/>
         <property name="filterChainDefinitions">
             <value>
+            	/index.html = anon
+            	/resources/** = anon
                 /index= anon
                 /** = user
             </value>

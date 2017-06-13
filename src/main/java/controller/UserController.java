@@ -16,7 +16,7 @@ import entity.User;
 import service.UserService;
 
 /**
- * ÓÃ»§Controller²ã
+ * ç”¨æˆ·Controllerå±‚
  * @author Administrator
  *
  */
@@ -44,7 +44,7 @@ public class UserController {
 		try{
 			subject.login(token);
 		}catch(Exception e){
-		    model.addAttribute("errorMsg", "ÓÃ»§Ãû/ÃÜÂë´íÎó");
+		    model.addAttribute("errorMsg", "ç”¨æˆ·å/å¯†ç é”™è¯¯");
 		    return "login";
 		}
 		User user = userService.getByUserName(username);
