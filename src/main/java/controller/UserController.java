@@ -49,7 +49,7 @@ public class UserController {
 		}
 		User user = userService.getByUserName(username);
 		subject.getSession().setAttribute("user", user);
-		return "success";
+		return "welcome";
 	}
 	
 
