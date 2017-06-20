@@ -49,7 +49,7 @@
 						class="icon-double-angle-right"></i> 教材书目
 				</a></li>
 
-				<li><a href="buttons.html"> <i
+				<li><a href="<%=request.getContextPath()%>/book/add"> <i
 						class="icon-double-angle-right"></i> 批量添加
 				</a></li>
 
