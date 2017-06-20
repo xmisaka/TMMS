@@ -39,5 +39,27 @@
 			<value>5242880</value>
 		</property>
 	</bean>
-
+	
+	<!-- 5.数据校验 -->
+    <!-- 国际化配置 -->    
+     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
+     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+          <property name="basenames">
+             <list>
+                 <value>classpath:resource/ValidationMessages</value>
+             </list>
+        </property>
+         <property name="useCodeAsDefaultMessage" value="true" />
+     </bean>
+    <!-- 表单校验器 -->
+     <mvc:annotation-driven validator="validator" />
+ 
+     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+         <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+         <!-- 这里配置将使用上面国际化配置的messageSource -->
+         <property name="validationMessageSource" ref="messageSource" />
+     </bean> 
+    <!-- 6.Shiro的spring拦截器开启-->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+	        depends-on="lifecycleBeanPostProcessor" />
 </beans>
