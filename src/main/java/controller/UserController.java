@@ -56,16 +56,16 @@ public class UserController {
 	}
     
     @RequiresPermissions({"teacher:add"})
-    @RequestMapping(value="book/add",method=RequestMethod.GET)
+    @RequestMapping(value="add",method=RequestMethod.GET)
 	public String add(Model model){
 		model.addAttribute(new User());
-		return "book/book_add";
+		return "add";
 	}
    
-    @RequestMapping(value="book/add",method=RequestMethod.POST)
+    @RequestMapping(value="add",method=RequestMethod.POST)
 	public String add(@Validated User user,BindingResult br){
     	if(br.hasErrors()){
-    		return "book/book_add";
+    		return "add";
     	}
     	userService.insert(user);
 		return "welcome";
