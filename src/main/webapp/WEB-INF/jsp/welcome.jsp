@@ -67,7 +67,7 @@
 								</div>
 
 									<div class="col-sm-12">
-										主要内容
+										<iframe scrolling="no" frameborder="0" src="main.jsp" name="mainiframe"></iframe>
 									</div><!-- /span -->
 									
 								<!-- PAGE CONTENT ENDS -->
