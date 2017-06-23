@@ -67,7 +67,7 @@
 								</div>
 
 									<div class="col-sm-12">
-										主要内容
+										<script src="https://sslapi.hitokoto.cn/"></script>
 									</div><!-- /span -->
 									
 								<!-- PAGE CONTENT ENDS -->
