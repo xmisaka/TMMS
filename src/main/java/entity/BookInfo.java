@@ -145,4 +145,15 @@ public class BookInfo {
     public void setExtend3(String extend3) {
         this.extend3 = extend3 == null ? null : extend3.trim();
     }
+
+	@Override
+	public String toString() {
+		return "BookInfo [id=" + id + ", bookName=" + bookName + ", bookKind=" + bookKind + ", bookAuthor=" + bookAuthor
+				+ ", bookIsbn=" + bookIsbn + ", bookPublish=" + bookPublish + ", bookPublishTime=" + bookPublishTime
+				+ ", bookPrice=" + bookPrice + ", bookIntro=" + bookIntro + ", createTime=" + createTime
+				+ ", updateTime=" + updateTime + ", extend1=" + extend1 + ", extend2=" + extend2 + ", extend3="
+				+ extend3 + "]";
+	}
+    
+    
 }

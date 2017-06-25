@@ -33,6 +33,7 @@ public class BookController {
 			page.setCurrentPage(currentPage);
 		}
 		logger.info(page.toString());
+		logger.info(bookInfo.toString());
 		List<BookInfo> books = bookService.listBook(bookInfo,page);
 		model.addAttribute("books",books);
 		return "bookList";
