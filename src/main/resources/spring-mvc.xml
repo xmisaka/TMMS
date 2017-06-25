@@ -13,10 +13,6 @@
 
 	<!--0.扫描controller包 -->
 	<context:component-scan base-package="controller" />
-	<context:component-scan base-package="book/controller" />
-	<context:component-scan base-package="stu/controller" />
-	<context:component-scan base-package="tch/controller" />
-	<context:component-scan base-package="pub/controller" />
 
 	<!--1.开启springmvc注解模式 a.自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter 
 		b.默认提供一系列的功能:数据绑定，数字和日期的format@NumberFormat,@DateTimeFormat c:xml,json的默认读写支持 -->
@@ -64,6 +60,6 @@
          <property name="validationMessageSource" ref="messageSource" />
      </bean> 
     <!-- 6.Shiro的spring拦截器开启-->
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
-	        depends-on="lifecycleBeanPostProcessor" />
+	<!-- <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+	        depends-on="lifecycleBeanPostProcessor" /> -->
 </beans>
