@@ -23,13 +23,12 @@
 		<property name="locations">
 			<list>
 				<value>classpath:jdbc.properties</value>
-				<value>classpath:shiro-config.properties</value>
 			</list>
 		</property>
 	</bean>
 	
 	<import resource="spring-mybatis.xml"/>
-	<import resource="spring-shiro.xml"/>
+<!-- 	<import resource="spring-shiro.xml"/> -->
 	<!-- 定时任务，运行去掉
 	<import resource="spring-timer.xml"/>
 	 -->
