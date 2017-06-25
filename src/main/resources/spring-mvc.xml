@@ -13,6 +13,10 @@
 
 	<!--0.扫描controller包 -->
 	<context:component-scan base-package="controller" />
+	<context:component-scan base-package="book/controller" />
+	<context:component-scan base-package="stu/controller" />
+	<context:component-scan base-package="tch/controller" />
+	<context:component-scan base-package="pub/controller" />
 
 	<!--1.开启springmvc注解模式 a.自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter 
 		b.默认提供一系列的功能:数据绑定，数字和日期的format@NumberFormat,@DateTimeFormat c:xml,json的默认读写支持 -->
@@ -39,5 +43,27 @@
 			<value>5242880</value>
 		</property>
 	</bean>
-
+	
+	<!-- 5.数据校验 -->
+    <!-- 国际化配置 -->    
+     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
+     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+          <property name="basenames">
+             <list>
+                 <value>classpath:resource/ValidationMessages</value>
+             </list>
+        </property>
+         <property name="useCodeAsDefaultMessage" value="true" />
+     </bean>
+    <!-- 表单校验器 -->
+     <mvc:annotation-driven validator="validator" />
+ 
+     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+         <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+         <!-- 这里配置将使用上面国际化配置的messageSource -->
+         <property name="validationMessageSource" ref="messageSource" />
+     </bean> 
+    <!-- 6.Shiro的spring拦截器开启-->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+	        depends-on="lifecycleBeanPostProcessor" />
 </beans>
