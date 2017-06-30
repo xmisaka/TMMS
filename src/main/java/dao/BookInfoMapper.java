@@ -23,5 +23,10 @@ public interface BookInfoMapper {
 	// 下面为自定义方法
 	List<BookInfo> listBook(@Param("bookInfo") BookInfo bookInfo, @Param("page") Page page);
 	
+	//按条件查询书籍信息
+	List<BookInfo> selectByParams(@Param("bookInfo") BookInfo bookInfo);
+	
 	int countBook(BookInfo bookInfo);
+	//批量插入书籍
+	void insertBookBatch(List<BookInfo> list);
 }

@@ -222,6 +222,27 @@
   	
   </select>
   
+  <select id="selectByParams" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from book_info
+  	<where>
+  		<if test="bookInfo.bookIsbn != null and !&quot;&quot;.equals(bookInfo.bookIsbn.trim())">
+  			and book_ISBN = #{bookInfo.bookIsbn}
+  		</if>
+  		<if test="bookInfo.bookName != null and !&quot;&quot;.equals(bookInfo.bookName.trim())">
+  			and book_name = #{bookInfo.bookName}
+  		</if>
+  		<if test="bookInfo.bookPublish != null and !&quot;&quot;.equals(bookInfo.bookPublish.trim())">
+  			and book_publish = #{bookInfo.bookPublish}
+  		</if>
+  		<if test="bookInfo.bookAuthor != null and !&quot;&quot;.equals(bookInfo.bookAuthor.trim())">
+  			and book_author = #{bookInfo.bookAuthor}
+  		</if>
+  	</where>
+  	
+  </select>
+  
   <select id="countBook" resultType="int" parameterType="entity.BookInfo">
   	select count(*) from book_info
   	<where>
@@ -239,4 +260,22 @@
   		</if>
   	</where>
   </select>
+  
+  <insert id="insertBookBatch" parameterType="java.util.List">
+		  insert into book_info (book_name,book_kind,book_author,book_ISBN,book_publish,book_publish_time,book_price,book_intro,create_time,update_time)
+		        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.bookName,jdbcType=VARCHAR},
+             #{item.bookKind,jdbcType=VARCHAR},
+             #{item.bookAuthor,jdbcType=VARCHAR},
+             #{item.bookIsbn,jdbcType=VARCHAR},
+             #{item.bookPublish,jdbcType=VARCHAR},
+             #{item.bookPublishTime,jdbcType=TIMESTAMP},
+             #{item.bookPrice,jdbcType=DECIMAL},
+             #{item.bookIntro,jdbcType=VARCHAR},
+             #{item.createTime,jdbcType=TIMESTAMP},
+             #{item.updateTime,jdbcType=TIMESTAMP}
+             )
+        </foreach>
+  </insert>
 </mapper>

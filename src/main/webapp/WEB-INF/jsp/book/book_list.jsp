@@ -15,11 +15,11 @@
 <title>教材管理系统后台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- basic styles -->
-<%@ include file="common/common-css.jsp"%>
+<%@ include file="../common/common-css.jsp"%>
 </head>
 
 <body>
-	<%@ include file="common/nav-top.jsp"%>
+	<%@ include file="../common/nav-top.jsp"%>
 	<div class="main-container" id="main-container">
 		<script type="text/javascript">
 			try {
@@ -33,7 +33,7 @@
 				class="menu-text"></span>
 			</a>
 
-			<%@ include file="common/nav-left.jsp"%>
+			<%@ include file="../common/nav-left.jsp"%>
 
 			<div class="main-content">
 				<div class="main-content-inner">
@@ -57,14 +57,14 @@
 						<div class="row">
 							<div class="col-xs-12">
 
-								<sf:form action="books" method="post" id="bookForm"
+								<sf:form action="books" method="post" id="Paramform"
 									class="form-horizontal">
 									<input type="hidden" name="currentPage" id="currentPage" value="1" />
 									<div class=" col-xs-12 table-header">书籍列表</div>
 									<div class="form-group col-sm-2">
 										<label> 每页条数 <select name="pageNumber">
 												<option value="10"
-													<c:if test="${page.pageNumber == 10}"> selected="selected"</c:if>>10</option>
+													<c:if test="${page.pageNumber == 10}"> selected="selected"</c:if>>2</option>
 												<option value="25"
 													<c:if test="${page.pageNumber == 25}"> selected="selected"</c:if>>25</option>
 												<option value="50"
@@ -114,10 +114,12 @@
 											</div>
 											
 											<div class="col-sm-1">
-												<input type="submit" value="查 询" />
+												<input type="button" id="books" value="查 询" />
+											</div>
+											<div class="col-sm-1">
+												<input type="button" id="bookexport" value="导出" />
 											</div>
 										</div>
-										<input type="submit" value="查 询" />
 									</div>
 
 									<table id="dynamic-table"
@@ -217,7 +219,7 @@
 	</div>
 	<!-- /.main-container -->
 
-	<%@ include file="common/common-js.jsp"%>
+	<%@ include file="../common/common-js.jsp"%>
 </body>
 </html>
 

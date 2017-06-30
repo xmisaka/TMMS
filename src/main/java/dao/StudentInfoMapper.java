@@ -1,6 +1,11 @@
 package dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import entity.StudentInfo;
+import util.Page;
 
 public interface StudentInfoMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +19,12 @@ public interface StudentInfoMapper {
     int updateByPrimaryKeySelective(StudentInfo record);
 
     int updateByPrimaryKey(StudentInfo record);
+ // 下面为自定义方法
+ 	List<StudentInfo> listStudent(@Param("studentInfo") StudentInfo studentInfo, @Param("page") Page page);
+ 	//按条件查询学生信息
+    List<StudentInfo> selectByParams(@Param("bookInfo") StudentInfo bookInfo);
+    
+ 	int countStudent(StudentInfo studentInfo);
+ 	//批量插入学生信息
+ 	void insertStudentInfoBatch(List<StudentInfo> list);
 }
