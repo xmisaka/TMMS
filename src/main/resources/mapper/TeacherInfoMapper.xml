@@ -200,22 +200,28 @@
   </update>
   
     <!-- 一下为自定义方法 -->
-  <select id="listBook" resultMap="BaseResultMap">
+  <select id="listTeacher" resultMap="BaseResultMap">
   	select
   	<include refid="Base_Column_List" />
-  	from book_info
+  	from teacher_info
   	<where>
-  		<if test="bookInfo.bookIsbn != null and !&quot;&quot;.equals(bookInfo.bookIsbn.trim())">
-  			and book_ISBN = #{bookInfo.bookIsbn}
+  		<if test="teacherInfo.teacherNo != null and !&quot;&quot;.equals(teacherInfo.teacherNo.trim())">
+  			and teacher_no = #{teacherInfo.teacherNo}
   		</if>
-  		<if test="bookInfo.bookName != null and !&quot;&quot;.equals(bookInfo.bookName.trim())">
-  			and book_name = #{bookInfo.bookName}
+  		<if test="teacherInfo.teacherName != null and !&quot;&quot;.equals(teacherInfo.teacherName.trim())">
+  			and teacher_name = #{teacherInfo.teacherName}
   		</if>
-  		<if test="bookInfo.bookPublish != null and !&quot;&quot;.equals(bookInfo.bookPublish.trim())">
-  			and book_publish = #{bookInfo.bookPublish}
+  		<if test="teacherInfo.teacherSex != null and !&quot;&quot;.equals(teacherInfo.teacherSex.trim())">
+  			and teacher_sex = #{teacherInfo.teacherSex}
   		</if>
-  		<if test="bookInfo.bookAuthor != null and !&quot;&quot;.equals(bookInfo.bookAuthor.trim())">
-  			and book_author = #{bookInfo.bookAuthor}
+  		<if test="teacherInfo.moblie != null and !&quot;&quot;.equals(teacherInfo.moblie.trim())">
+  			and moblie = #{teacherInfo.moblie}
+  		</if>
+  		<if test="teacherInfo.collegeId != null and !&quot;&quot;.equals(teacherInfo.collegeId.trim())">
+  			and college_id = #{teacherInfo.collegeId}
+  		</if>
+  		<if test="teacherInfo.bookAuthor != null and !&quot;&quot;.equals(teacherInfo.bookAuthor.trim())">
+  			and state = #{teacherInfo.state}
   		</if>
   	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
   	
@@ -224,56 +230,68 @@
   <select id="selectByParams" resultMap="BaseResultMap">
   	select
   	<include refid="Base_Column_List" />
-  	from book_info
+  	from teacher_info
   	<where>
-  		<if test="bookInfo.bookIsbn != null and !&quot;&quot;.equals(bookInfo.bookIsbn.trim())">
-  			and book_ISBN = #{bookInfo.bookIsbn}
+  		<if test="teacherInfo.teacherNo != null and !&quot;&quot;.equals(teacherInfo.teacherNo.trim())">
+  			and teacher_no = #{teacherInfo.teacherNo}
   		</if>
-  		<if test="bookInfo.bookName != null and !&quot;&quot;.equals(bookInfo.bookName.trim())">
-  			and book_name = #{bookInfo.bookName}
+  		<if test="teacherInfo.teacherName != null and !&quot;&quot;.equals(teacherInfo.teacherName.trim())">
+  			and teacher_name = #{teacherInfo.teacherName}
   		</if>
-  		<if test="bookInfo.bookPublish != null and !&quot;&quot;.equals(bookInfo.bookPublish.trim())">
-  			and book_publish = #{bookInfo.bookPublish}
+  		<if test="teacherInfo.teacherSex != null and !&quot;&quot;.equals(teacherInfo.teacherSex.trim())">
+  			and teacher_sex = #{teacherInfo.teacherSex}
   		</if>
-  		<if test="bookInfo.bookAuthor != null and !&quot;&quot;.equals(bookInfo.bookAuthor.trim())">
-  			and book_author = #{bookInfo.bookAuthor}
+  		<if test="teacherInfo.moblie != null and !&quot;&quot;.equals(teacherInfo.moblie.trim())">
+  			and moblie = #{teacherInfo.moblie}
+  		</if>
+  		<if test="teacherInfo.collegeId != null and !&quot;&quot;.equals(teacherInfo.collegeId.trim())">
+  			and college_id = #{teacherInfo.collegeId}
+  		</if>
+  		<if test="teacherInfo.bookAuthor != null and !&quot;&quot;.equals(teacherInfo.bookAuthor.trim())">
+  			and state = #{teacherInfo.state}
   		</if>
   	</where>
   	
   </select>
   
-  <select id="countBook" resultType="int" parameterType="entity.BookInfo">
-  	select count(*) from book_info
+  <select id="countTeacher" resultType="int" parameterType="entity.TeacherInfo">
+  	select count(*) from teacher_info
   	<where>
-  		<if test="bookIsbn != null and !&quot;&quot;.equals(bookIsbn.trim())">
-  			and book_ISBN = #{bookIsbn}
+  		<if test="teacherInfo.teacherNo != null and !&quot;&quot;.equals(teacherInfo.teacherNo.trim())">
+  			and teacher_no = #{teacherInfo.teacherNo}
   		</if>
-  		<if test="bookName != null and !&quot;&quot;.equals(bookName.trim())">
-  			and book_name = #{bookName}
+  		<if test="teacherInfo.teacherName != null and !&quot;&quot;.equals(teacherInfo.teacherName.trim())">
+  			and teacher_name = #{teacherInfo.teacherName}
   		</if>
-  		<if test="bookPublish != null and !&quot;&quot;.equals(bookPublish.trim())">
-  			and book_publish = #{bookPublish}
+  		<if test="teacherInfo.teacherSex != null and !&quot;&quot;.equals(teacherInfo.teacherSex.trim())">
+  			and teacher_sex = #{teacherInfo.teacherSex}
   		</if>
-  		<if test="bookAuthor != null and !&quot;&quot;.equals(bookAuthor.trim())">
-  			and book_author = #{bookAuthor}
+  		<if test="teacherInfo.moblie != null and !&quot;&quot;.equals(teacherInfo.moblie.trim())">
+  			and moblie = #{teacherInfo.moblie}
+  		</if>
+  		<if test="teacherInfo.collegeId != null and !&quot;&quot;.equals(teacherInfo.collegeId.trim())">
+  			and college_id = #{teacherInfo.collegeId}
+  		</if>
+  		<if test="teacherInfo.bookAuthor != null and !&quot;&quot;.equals(teacherInfo.bookAuthor.trim())">
+  			and state = #{teacherInfo.state}
   		</if>
   	</where>
   </select>
   
-  <insert id="insertBookBatch" parameterType="java.util.List">
-		  insert into book_info (book_name,book_kind,book_author,book_ISBN,book_publish,book_publish_time,book_price,book_intro,create_time,update_time)
+  <insert id="insertTeacherBatch" parameterType="java.util.List">
+		  insert into teacher_info (teacher_no,teacher_name,teacher_sex,moblie,teacher_pwd,college_id,technical_title,create_time,update_time,state)
 		        values
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.bookName,jdbcType=VARCHAR},
-             #{item.bookKind,jdbcType=VARCHAR},
-             #{item.bookAuthor,jdbcType=VARCHAR},
-             #{item.bookIsbn,jdbcType=VARCHAR},
-             #{item.bookPublish,jdbcType=VARCHAR},
-             #{item.bookPublishTime,jdbcType=TIMESTAMP},
-             #{item.bookPrice,jdbcType=DECIMAL},
-             #{item.bookIntro,jdbcType=VARCHAR},
+            (#{item.teacherNo,jdbcType=VARCHAR},
+             #{item.teacherName,jdbcType=VARCHAR},
+             #{item.teacherSex,jdbcType=VARCHAR},
+             #{item.moblie,jdbcType=VARCHAR},
+             #{item.teacherPwd,jdbcType=VARCHAR},
+             #{item.collegeId,jdbcType=VARCHAR},
+             #{item.technicalTitle,jdbcType=VARCHAR},
              #{item.createTime,jdbcType=TIMESTAMP},
-             #{item.updateTime,jdbcType=TIMESTAMP}
+             #{item.updateTime,jdbcType=TIMESTAMP},
+             #{item.state,jdbcType=TINYINT}
              )
         </foreach>
   </insert>
