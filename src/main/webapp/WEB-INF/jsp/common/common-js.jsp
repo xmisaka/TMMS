@@ -44,4 +44,5 @@
 		<!-- ace scripts -->
 		<script src="<%=basePath2 %>resources/js/ace-elements.min.js"></script>
 		<script src="<%=basePath2 %>resources/js/ace.min.js"></script>
+		<script src="<%=basePath2 %>resources/js/back/list.js"></script>
 		<!-- inline scripts related to this page -->

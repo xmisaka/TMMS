@@ -3,6 +3,8 @@ package entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class StudentInfo {
     private Integer id;
 
@@ -49,7 +51,7 @@ public class StudentInfo {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    @NotEmpty(message="学号不能为空")
     public String getStudentNo() {
         return studentNo;
     }
@@ -57,7 +59,7 @@ public class StudentInfo {
     public void setStudentNo(String studentNo) {
         this.studentNo = studentNo == null ? null : studentNo.trim();
     }
-
+    @NotEmpty(message="学生姓名不能为空")
     public String getStudentName() {
         return studentName;
     }
@@ -65,7 +67,7 @@ public class StudentInfo {
     public void setStudentName(String studentName) {
         this.studentName = studentName == null ? null : studentName.trim();
     }
-
+    @NotEmpty(message="性别不能为空")
     public String getStudentSex() {
         return studentSex;
     }
@@ -73,7 +75,7 @@ public class StudentInfo {
     public void setStudentSex(String studentSex) {
         this.studentSex = studentSex == null ? null : studentSex.trim();
     }
-
+    @NotEmpty(message="手机号不能为空")
     public String getMobile() {
         return mobile;
     }
@@ -89,7 +91,7 @@ public class StudentInfo {
     public void setStudentPwd(String studentPwd) {
         this.studentPwd = studentPwd == null ? null : studentPwd.trim();
     }
-
+    @NotEmpty(message="年级不能为空")
     public String getStudentGrade() {
         return studentGrade;
     }
@@ -97,7 +99,7 @@ public class StudentInfo {
     public void setStudentGrade(String studentGrade) {
         this.studentGrade = studentGrade == null ? null : studentGrade.trim();
     }
-
+    @NotEmpty(message="班级不能为空")
     public String getClassId() {
         return classId;
     }
@@ -105,7 +107,7 @@ public class StudentInfo {
     public void setClassId(String classId) {
         this.classId = classId == null ? null : classId.trim();
     }
-
+    @NotEmpty(message="专业不能为空")
     public String getSpecialtyId() {
         return specialtyId;
     }
@@ -113,7 +115,7 @@ public class StudentInfo {
     public void setSpecialtyId(String specialtyId) {
         this.specialtyId = specialtyId == null ? null : specialtyId.trim();
     }
-
+    @NotEmpty(message="学院不能为空")
     public String getCollegeId() {
         return collegeId;
     }
@@ -121,7 +123,7 @@ public class StudentInfo {
     public void setCollegeId(String collegeId) {
         this.collegeId = collegeId == null ? null : collegeId.trim();
     }
-
+    @NotEmpty(message="入学时间不能为空")
     public Date getEnterTime() {
         return enterTime;
     }
@@ -137,7 +139,7 @@ public class StudentInfo {
     public void setPayStatus(String payStatus) {
         this.payStatus = payStatus == null ? null : payStatus.trim();
     }
-
+    @NotEmpty(message="初始缴费金额")
     public BigDecimal getInitialAmount() {
         return initialAmount;
     }

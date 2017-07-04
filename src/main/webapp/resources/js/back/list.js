@@ -87,3 +87,11 @@ function reset(){
 function doSubmit(){
 	document.getElementById("addForm").submit();
 }
+/**
+ * list页面根据id的值判断查询还是导出
+ * 
+ */
+$("input[type=button]").click(function(){
+	var type=$(this).attr("id");
+    $("#Paramform").attr("action",type).submit();
+})

@@ -62,4 +62,38 @@
     <!-- 6.Shiro的spring拦截器开启-->
 	<!-- <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
 	        depends-on="lifecycleBeanPostProcessor" /> -->
+	        
+	<!-- 7.定时任务的配置-->
+	<!-- 第一步、Scheduler的配置。 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 
+     <bean id="scheduler" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+          <property name="triggers">
+              <list>
+                  <ref bean="trigger"/>
+              </list>
+          </property>
+      </bean>  -->
+      <!-- 第二步、Trigger的配置。 定义触发时间   每天凌晨2点执行一次 
+     <bean id="trigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+          <property name="jobDetail">
+              <ref bean="jobDetail"/>
+          </property>
+          <property name="cronExpression">
+             <value>0 0 2 * * ?</value>
+          </property>
+      </bean>-->
+      <!-- 第三步.JobDetail的配置。 定义调用对象和调用对象的方法
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+          <property name="targetObject">
+              <ref bean="orderJob"/>
+          </property>
+          <property name="targetMethod">
+              <value>doTask</value>
+          </property>
+          <property name="concurrent">  
+              <value>false</value>  
+          </property>  
+     </bean> -->
+     <!-- 第四步、业务类的配置 
+    <bean id="orderJob" class="com.ylsoft.core.csm.util.OrderTask"/>-->
+    
 </beans>

@@ -198,4 +198,101 @@
       extend3 = #{extend3,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+    <!-- 一下为自定义方法 -->
+  <select id="listTeacher" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from teacher_info
+  	<where>
+  		<if test="teacherInfo.teacherNo != null and !&quot;&quot;.equals(teacherInfo.teacherNo.trim())">
+  			and teacher_no = #{teacherInfo.teacherNo}
+  		</if>
+  		<if test="teacherInfo.teacherName != null and !&quot;&quot;.equals(teacherInfo.teacherName.trim())">
+  			and teacher_name = #{teacherInfo.teacherName}
+  		</if>
+  		<if test="teacherInfo.teacherSex != null and !&quot;&quot;.equals(teacherInfo.teacherSex.trim())">
+  			and teacher_sex = #{teacherInfo.teacherSex}
+  		</if>
+  		<if test="teacherInfo.moblie != null and !&quot;&quot;.equals(teacherInfo.moblie.trim())">
+  			and moblie = #{teacherInfo.moblie}
+  		</if>
+  		<if test="teacherInfo.collegeId != null and !&quot;&quot;.equals(teacherInfo.collegeId.trim())">
+  			and college_id = #{teacherInfo.collegeId}
+  		</if>
+  		<if test="teacherInfo.bookAuthor != null and !&quot;&quot;.equals(teacherInfo.bookAuthor.trim())">
+  			and state = #{teacherInfo.state}
+  		</if>
+  	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
+  	
+  </select>
+  
+  <select id="selectByParams" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from teacher_info
+  	<where>
+  		<if test="teacherInfo.teacherNo != null and !&quot;&quot;.equals(teacherInfo.teacherNo.trim())">
+  			and teacher_no = #{teacherInfo.teacherNo}
+  		</if>
+  		<if test="teacherInfo.teacherName != null and !&quot;&quot;.equals(teacherInfo.teacherName.trim())">
+  			and teacher_name = #{teacherInfo.teacherName}
+  		</if>
+  		<if test="teacherInfo.teacherSex != null and !&quot;&quot;.equals(teacherInfo.teacherSex.trim())">
+  			and teacher_sex = #{teacherInfo.teacherSex}
+  		</if>
+  		<if test="teacherInfo.moblie != null and !&quot;&quot;.equals(teacherInfo.moblie.trim())">
+  			and moblie = #{teacherInfo.moblie}
+  		</if>
+  		<if test="teacherInfo.collegeId != null and !&quot;&quot;.equals(teacherInfo.collegeId.trim())">
+  			and college_id = #{teacherInfo.collegeId}
+  		</if>
+  		<if test="teacherInfo.bookAuthor != null and !&quot;&quot;.equals(teacherInfo.bookAuthor.trim())">
+  			and state = #{teacherInfo.state}
+  		</if>
+  	</where>
+  	
+  </select>
+  
+  <select id="countTeacher" resultType="int" parameterType="entity.TeacherInfo">
+  	select count(*) from teacher_info
+  	<where>
+  		<if test="teacherInfo.teacherNo != null and !&quot;&quot;.equals(teacherInfo.teacherNo.trim())">
+  			and teacher_no = #{teacherInfo.teacherNo}
+  		</if>
+  		<if test="teacherInfo.teacherName != null and !&quot;&quot;.equals(teacherInfo.teacherName.trim())">
+  			and teacher_name = #{teacherInfo.teacherName}
+  		</if>
+  		<if test="teacherInfo.teacherSex != null and !&quot;&quot;.equals(teacherInfo.teacherSex.trim())">
+  			and teacher_sex = #{teacherInfo.teacherSex}
+  		</if>
+  		<if test="teacherInfo.moblie != null and !&quot;&quot;.equals(teacherInfo.moblie.trim())">
+  			and moblie = #{teacherInfo.moblie}
+  		</if>
+  		<if test="teacherInfo.collegeId != null and !&quot;&quot;.equals(teacherInfo.collegeId.trim())">
+  			and college_id = #{teacherInfo.collegeId}
+  		</if>
+  		<if test="teacherInfo.bookAuthor != null and !&quot;&quot;.equals(teacherInfo.bookAuthor.trim())">
+  			and state = #{teacherInfo.state}
+  		</if>
+  	</where>
+  </select>
+  
+  <insert id="insertTeacherBatch" parameterType="java.util.List">
+		  insert into teacher_info (teacher_no,teacher_name,teacher_sex,moblie,teacher_pwd,college_id,technical_title,create_time,update_time,state)
+		        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.teacherNo,jdbcType=VARCHAR},
+             #{item.teacherName,jdbcType=VARCHAR},
+             #{item.teacherSex,jdbcType=VARCHAR},
+             #{item.moblie,jdbcType=VARCHAR},
+             #{item.teacherPwd,jdbcType=VARCHAR},
+             #{item.collegeId,jdbcType=VARCHAR},
+             #{item.technicalTitle,jdbcType=VARCHAR},
+             #{item.createTime,jdbcType=TIMESTAMP},
+             #{item.updateTime,jdbcType=TIMESTAMP},
+             #{item.state,jdbcType=TINYINT}
+             )
+        </foreach>
+  </insert>
 </mapper>

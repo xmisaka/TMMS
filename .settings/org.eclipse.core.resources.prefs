@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//src/main/java/util/DateUtil.java=UTF-8
+encoding//src/main/resources/log4j.properties=UTF-8
 encoding//src/main/resources/spring-shiro.xml=UTF-8
 encoding//src/main/webapp/WEB-INF/jsp/common/common-css.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/jsp/common/common-js.jsp=UTF-8
@@ -8,4 +10,3 @@ encoding//src/main/webapp/WEB-INF/jsp/login.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/jsp/welcome2.jsp=UTF-8
 encoding//src/main/webapp/index.jsp=UTF-8
 encoding//src/main/webapp/resources/font/fontawesome-webfont.woff=UTF-8
-encoding/<project>=UTF-8

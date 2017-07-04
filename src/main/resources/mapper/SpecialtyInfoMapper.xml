@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.SpecialtyInfoMapper" >
+  <resultMap id="BaseResultMap" type="entity.SpecialtyInfo" >
+    <id column="specialty_id" property="specialtyId" jdbcType="VARCHAR" />
+    <result column="college_id" property="collegeId" jdbcType="VARCHAR" />
+    <result column="specialty_name" property="specialtyName" jdbcType="VARCHAR" />
+    <result column="schsys" property="schsys" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="extend1" property="extend1" jdbcType="VARCHAR" />
+    <result column="extend2" property="extend2" jdbcType="VARCHAR" />
+    <result column="extend3" property="extend3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    specialty_id, college_id, specialty_name, schsys, create_time, update_time, extend1, 
+    extend2, extend3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from specialty_info
+    where specialty_id = #{specialtyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from specialty_info
+    where specialty_id = #{specialtyId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="entity.SpecialtyInfo" >
+    insert into specialty_info (specialty_id, college_id, specialty_name, 
+      schsys, create_time, update_time, 
+      extend1, extend2, extend3
+      )
+    values (#{specialtyId,jdbcType=VARCHAR}, #{collegeId,jdbcType=VARCHAR}, #{specialtyName,jdbcType=VARCHAR}, 
+      #{schsys,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{extend1,jdbcType=VARCHAR}, #{extend2,jdbcType=VARCHAR}, #{extend3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="entity.SpecialtyInfo" >
+    insert into specialty_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="specialtyId != null" >
+        specialty_id,
+      </if>
+      <if test="collegeId != null" >
+        college_id,
+      </if>
+      <if test="specialtyName != null" >
+        specialty_name,
+      </if>
+      <if test="schsys != null" >
+        schsys,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="extend1 != null" >
+        extend1,
+      </if>
+      <if test="extend2 != null" >
+        extend2,
+      </if>
+      <if test="extend3 != null" >
+        extend3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="specialtyId != null" >
+        #{specialtyId,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null" >
+        #{collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="specialtyName != null" >
+        #{specialtyName,jdbcType=VARCHAR},
+      </if>
+      <if test="schsys != null" >
+        #{schsys,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend1 != null" >
+        #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null" >
+        #{extend3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.SpecialtyInfo" >
+    update specialty_info
+    <set >
+      <if test="collegeId != null" >
+        college_id = #{collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="specialtyName != null" >
+        specialty_name = #{specialtyName,jdbcType=VARCHAR},
+      </if>
+      <if test="schsys != null" >
+        schsys = #{schsys,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend1 != null" >
+        extend1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        extend2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null" >
+        extend3 = #{extend3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where specialty_id = #{specialtyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.SpecialtyInfo" >
+    update specialty_info
+    set college_id = #{collegeId,jdbcType=VARCHAR},
+      specialty_name = #{specialtyName,jdbcType=VARCHAR},
+      schsys = #{schsys,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      extend1 = #{extend1,jdbcType=VARCHAR},
+      extend2 = #{extend2,jdbcType=VARCHAR},
+      extend3 = #{extend3,jdbcType=VARCHAR}
+    where specialty_id = #{specialtyId,jdbcType=VARCHAR}
+  </update>
+</mapper>
