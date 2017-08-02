@@ -2,6 +2,10 @@ package entity;
 
 import java.util.Date;
 
+import javax.validation.constraints.DecimalMin;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class CollegeInfo {
     private String collegeId;
 
@@ -22,15 +26,14 @@ public class CollegeInfo {
     private String extend2;
 
     private String extend3;
-
     public String getCollegeId() {
         return collegeId;
     }
-
+    
     public void setCollegeId(String collegeId) {
         this.collegeId = collegeId == null ? null : collegeId.trim();
     }
-
+    @NotEmpty(message="学院名字不能为空")
     public String getCollegeName() {
         return collegeName;
     }
@@ -46,7 +49,7 @@ public class CollegeInfo {
     public void setCollegePwd(String collegePwd) {
         this.collegePwd = collegePwd == null ? null : collegePwd.trim();
     }
-
+    @NotEmpty(message="院系负责人不能为空")
     public String getCollegePrincipal() {
         return collegePrincipal;
     }
@@ -54,7 +57,7 @@ public class CollegeInfo {
     public void setCollegePrincipal(String collegePrincipal) {
         this.collegePrincipal = collegePrincipal == null ? null : collegePrincipal.trim();
     }
-
+    @NotEmpty(message="所属学校不能为空")
     public String getSchool() {
         return school;
     }

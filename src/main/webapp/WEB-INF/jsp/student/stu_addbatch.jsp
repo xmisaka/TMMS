@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 
 <html>
@@ -58,7 +56,7 @@
 							<div class="col-xs-12">
 
 								<sf:form action="studentaddbatch" method="post" id="bookForm"
-									class="form-horizontal">
+									class="form-horizontal" enctype="multipart/form-data">
 									<div class="form-group">
 										<label class="col-sm-1 contorl-label text-right">选择文件</label>
 										<div class="col-sm-2">

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 
 <html>
@@ -64,7 +62,7 @@
 									<div class="form-group col-sm-2">
 										<label> 每页条数 <select name="pageNumber">
 												<option value="10"
-													<c:if test="${page.pageNumber == 10}"> selected="selected"</c:if>>2</option>
+													<c:if test="${page.pageNumber == 10}"> selected="selected"</c:if>>10</option>
 												<option value="25"
 													<c:if test="${page.pageNumber == 25}"> selected="selected"</c:if>>25</option>
 												<option value="50"
@@ -89,12 +87,12 @@
 
 										<div class="col-sm-4">
 											<div id="dynamic-table_filter" class="dataTables_filter">
-												<a href="add">
+												<a href="bookadd">
 													<button type="button" class="btn btn-success btn-sm">
 														<span class="icon-plus"></span>&nbsp;&nbsp;新增
 													</button>
 												</a>&nbsp;&nbsp; <a
-													href="javascript:batchDelete('deleteteachers')">
+													href="booksdel">
 													<button class="btn btn-danger btn-sm">
 														<span class="icon-trash"></span>&nbsp;&nbsp;删除
 													</button>
@@ -115,6 +113,9 @@
 											
 											<div class="col-sm-1">
 												<input type="button" id="books" value="查 询" />
+											</div>
+											<div class="col-sm-1">
+												<input type="button" id="bookaddbatch" value="导入" />
 											</div>
 											<div class="col-sm-1">
 												<input type="button" id="bookexport" value="导出" />
@@ -153,10 +154,10 @@
 															<div class="hidden-sm hidden-xs action-buttons">
 																<a class="blue" href="#"> <i
 																	class="ace-icon fa fa-search-plus bigger-130"></i>
-																</a> <a class="green" href="${book.id}/update"> <i
-																	class="ace-icon fa fa-pencil bigger-130"></i>
-																</a> <a class="red" href="${book.id}/delete"> <i
-																	class="ace-icon fa fa-trash-o bigger-130"></i>
+																</a> <a class="green" href="${book.id}/bookedit">修改<i
+																	class="icon-edit"></i>
+																</a> <a class="red" href="${book.id}/bookdel">删除<i
+																	class="icon-trash"></i>
 																</a>
 															</div>
 														</td>

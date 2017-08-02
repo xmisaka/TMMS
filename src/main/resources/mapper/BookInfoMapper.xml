@@ -35,12 +35,12 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into book_info (id, book_name, book_kind, 
+    insert into book_info (book_name, book_kind, 
       book_author, book_ISBN, book_publish, 
       book_publish_time, book_price, book_intro, 
       create_time, update_time, extend1, 
       extend2, extend3)
-    values (#{id,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{bookKind,jdbcType=VARCHAR}, 
+    values (#{bookName,jdbcType=VARCHAR}, #{bookKind,jdbcType=VARCHAR}, 
       #{bookAuthor,jdbcType=VARCHAR}, #{bookIsbn,jdbcType=VARCHAR}, #{bookPublish,jdbcType=VARCHAR}, 
       #{bookPublishTime,jdbcType=TIMESTAMP}, #{bookPrice,jdbcType=DECIMAL}, #{bookIntro,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{extend1,jdbcType=VARCHAR}, 
@@ -52,7 +52,6 @@
     </selectKey>
     insert into book_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      id,
       <if test="bookName != null" >
         book_name,
       </if>
@@ -94,7 +93,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{id,jdbcType=INTEGER},
       <if test="bookName != null" >
         #{bookName,jdbcType=VARCHAR},
       </if>

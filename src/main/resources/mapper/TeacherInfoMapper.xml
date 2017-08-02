@@ -6,7 +6,7 @@
     <result column="teacher_no" property="teacherNo" jdbcType="VARCHAR" />
     <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
     <result column="teacher_sex" property="teacherSex" jdbcType="CHAR" />
-    <result column="moblie" property="moblie" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="teacher_pwd" property="teacherPwd" jdbcType="VARCHAR" />
     <result column="college_id" property="collegeId" jdbcType="VARCHAR" />
     <result column="technical_title" property="technicalTitle" jdbcType="VARCHAR" />
@@ -18,7 +18,7 @@
     <result column="extend3" property="extend3" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, teacher_no, teacher_name, teacher_sex, moblie, teacher_pwd, college_id, technical_title, 
+    id, teacher_no, teacher_name, teacher_sex, mobile, teacher_pwd, college_id, technical_title, 
     create_time, update_time, state, extend1, extend2, extend3
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -35,13 +35,13 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into teacher_info (id, teacher_no, teacher_name, 
-      teacher_sex, moblie, teacher_pwd, 
+    insert into teacher_info (teacher_no, teacher_name, 
+      teacher_sex, mobile, teacher_pwd, 
       college_id, technical_title, create_time, 
       update_time, state, extend1, 
       extend2, extend3)
-    values (#{id,jdbcType=INTEGER}, #{teacherNo,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, 
-      #{teacherSex,jdbcType=CHAR}, #{moblie,jdbcType=VARCHAR}, #{teacherPwd,jdbcType=VARCHAR}, 
+    values (#{teacherNo,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, 
+      #{teacherSex,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR}, #{teacherPwd,jdbcType=VARCHAR}, 
       #{collegeId,jdbcType=VARCHAR}, #{technicalTitle,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{state,jdbcType=TINYINT}, #{extend1,jdbcType=VARCHAR}, 
       #{extend2,jdbcType=VARCHAR}, #{extend3,jdbcType=VARCHAR})
@@ -52,7 +52,6 @@
     </selectKey>
     insert into teacher_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      id,
       <if test="teacherNo != null" >
         teacher_no,
       </if>
@@ -62,8 +61,8 @@
       <if test="teacherSex != null" >
         teacher_sex,
       </if>
-      <if test="moblie != null" >
-        moblie,
+      <if test="mobile != null" >
+        mobile,
       </if>
       <if test="teacherPwd != null" >
         teacher_pwd,
@@ -94,7 +93,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{id,jdbcType=INTEGER},
       <if test="teacherNo != null" >
         #{teacherNo,jdbcType=VARCHAR},
       </if>
@@ -104,8 +102,8 @@
       <if test="teacherSex != null" >
         #{teacherSex,jdbcType=CHAR},
       </if>
-      <if test="moblie != null" >
-        #{moblie,jdbcType=VARCHAR},
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="teacherPwd != null" >
         #{teacherPwd,jdbcType=VARCHAR},
@@ -138,7 +136,7 @@
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="entity.TeacherInfo" >
     update teacher_info
-    <set >
+    <set>
       <if test="teacherNo != null" >
         teacher_no = #{teacherNo,jdbcType=VARCHAR},
       </if>
@@ -148,8 +146,8 @@
       <if test="teacherSex != null" >
         teacher_sex = #{teacherSex,jdbcType=CHAR},
       </if>
-      <if test="moblie != null" >
-        moblie = #{moblie,jdbcType=VARCHAR},
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="teacherPwd != null" >
         teacher_pwd = #{teacherPwd,jdbcType=VARCHAR},
@@ -186,7 +184,7 @@
     set teacher_no = #{teacherNo,jdbcType=VARCHAR},
       teacher_name = #{teacherName,jdbcType=VARCHAR},
       teacher_sex = #{teacherSex,jdbcType=CHAR},
-      moblie = #{moblie,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
       teacher_pwd = #{teacherPwd,jdbcType=VARCHAR},
       college_id = #{collegeId,jdbcType=VARCHAR},
       technical_title = #{technicalTitle,jdbcType=VARCHAR},
@@ -214,14 +212,14 @@
   		<if test="teacherInfo.teacherSex != null and !&quot;&quot;.equals(teacherInfo.teacherSex.trim())">
   			and teacher_sex = #{teacherInfo.teacherSex}
   		</if>
-  		<if test="teacherInfo.moblie != null and !&quot;&quot;.equals(teacherInfo.moblie.trim())">
-  			and moblie = #{teacherInfo.moblie}
+  		<if test="teacherInfo.mobile != null and !&quot;&quot;.equals(teacherInfo.mobile.trim())">
+  			and mobile = #{teacherInfo.mobile}
   		</if>
   		<if test="teacherInfo.collegeId != null and !&quot;&quot;.equals(teacherInfo.collegeId.trim())">
   			and college_id = #{teacherInfo.collegeId}
   		</if>
-  		<if test="teacherInfo.bookAuthor != null and !&quot;&quot;.equals(teacherInfo.bookAuthor.trim())">
-  			and state = #{teacherInfo.state}
+  		<if test="teacherInfo.technicalTitle != null and !&quot;&quot;.equals(teacherInfo.technicalTitle.trim())">
+  			and technical_title = #{teacherInfo.technicalTitle}
   		</if>
   	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
   	
@@ -241,14 +239,14 @@
   		<if test="teacherInfo.teacherSex != null and !&quot;&quot;.equals(teacherInfo.teacherSex.trim())">
   			and teacher_sex = #{teacherInfo.teacherSex}
   		</if>
-  		<if test="teacherInfo.moblie != null and !&quot;&quot;.equals(teacherInfo.moblie.trim())">
-  			and moblie = #{teacherInfo.moblie}
+  		<if test="teacherInfo.mobile != null and !&quot;&quot;.equals(teacherInfo.mobile.trim())">
+  			and mobile = #{teacherInfo.mobile}
   		</if>
   		<if test="teacherInfo.collegeId != null and !&quot;&quot;.equals(teacherInfo.collegeId.trim())">
   			and college_id = #{teacherInfo.collegeId}
   		</if>
-  		<if test="teacherInfo.bookAuthor != null and !&quot;&quot;.equals(teacherInfo.bookAuthor.trim())">
-  			and state = #{teacherInfo.state}
+  		<if test="teacherInfo.technicalTitle != null and !&quot;&quot;.equals(teacherInfo.technicalTitle.trim())">
+  			and technical_title = #{teacherInfo.teacherInfo.technicalTitle}
   		</if>
   	</where>
   	
@@ -257,35 +255,35 @@
   <select id="countTeacher" resultType="int" parameterType="entity.TeacherInfo">
   	select count(*) from teacher_info
   	<where>
-  		<if test="teacherInfo.teacherNo != null and !&quot;&quot;.equals(teacherInfo.teacherNo.trim())">
-  			and teacher_no = #{teacherInfo.teacherNo}
+  		<if test="teacherNo != null and !&quot;&quot;.equals(teacherNo.trim())">
+  			and teacher_no = #{teacherNo}
   		</if>
-  		<if test="teacherInfo.teacherName != null and !&quot;&quot;.equals(teacherInfo.teacherName.trim())">
-  			and teacher_name = #{teacherInfo.teacherName}
+  		<if test="teacherName != null and !&quot;&quot;.equals(teacherName.trim())">
+  			and teacher_name = #{teacherName}
   		</if>
-  		<if test="teacherInfo.teacherSex != null and !&quot;&quot;.equals(teacherInfo.teacherSex.trim())">
-  			and teacher_sex = #{teacherInfo.teacherSex}
+  		<if test="teacherSex != null and !&quot;&quot;.equals(teacherSex.trim())">
+  			and teacher_sex = #{teacherSex}
   		</if>
-  		<if test="teacherInfo.moblie != null and !&quot;&quot;.equals(teacherInfo.moblie.trim())">
-  			and moblie = #{teacherInfo.moblie}
+  		<if test="mobile != null and !&quot;&quot;.equals(mobile.trim())">
+  			and mobile = #{mobile}
   		</if>
-  		<if test="teacherInfo.collegeId != null and !&quot;&quot;.equals(teacherInfo.collegeId.trim())">
-  			and college_id = #{teacherInfo.collegeId}
+  		<if test="collegeId != null and !&quot;&quot;.equals(collegeId.trim())">
+  			and college_id = #{collegeId}
   		</if>
-  		<if test="teacherInfo.bookAuthor != null and !&quot;&quot;.equals(teacherInfo.bookAuthor.trim())">
-  			and state = #{teacherInfo.state}
+  		<if test="technicalTitle != null and !&quot;&quot;.equals(technicalTitle.trim())">
+  			and technical_title = #{technicalTitle}
   		</if>
   	</where>
   </select>
   
   <insert id="insertTeacherBatch" parameterType="java.util.List">
-		  insert into teacher_info (teacher_no,teacher_name,teacher_sex,moblie,teacher_pwd,college_id,technical_title,create_time,update_time,state)
+		  insert into teacher_info (teacher_no,teacher_name,teacher_sex,mobile,teacher_pwd,college_id,technical_title,create_time,update_time,state)
 		        values
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.teacherNo,jdbcType=VARCHAR},
              #{item.teacherName,jdbcType=VARCHAR},
              #{item.teacherSex,jdbcType=VARCHAR},
-             #{item.moblie,jdbcType=VARCHAR},
+             #{item.mobile,jdbcType=VARCHAR},
              #{item.teacherPwd,jdbcType=VARCHAR},
              #{item.collegeId,jdbcType=VARCHAR},
              #{item.technicalTitle,jdbcType=VARCHAR},

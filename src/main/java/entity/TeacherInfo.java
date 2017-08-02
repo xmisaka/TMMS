@@ -2,6 +2,10 @@ package entity;
 
 import java.util.Date;
 
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class TeacherInfo {
     private Integer id;
 
@@ -11,7 +15,7 @@ public class TeacherInfo {
 
     private String teacherSex;
 
-    private String moblie;
+    private String mobile;
 
     private String teacherPwd;
 
@@ -38,7 +42,7 @@ public class TeacherInfo {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    @NotEmpty(message="教职工号不能为空")
     public String getTeacherNo() {
         return teacherNo;
     }
@@ -46,7 +50,7 @@ public class TeacherInfo {
     public void setTeacherNo(String teacherNo) {
         this.teacherNo = teacherNo == null ? null : teacherNo.trim();
     }
-
+    @NotEmpty(message="教师名字不能为空")
     public String getTeacherName() {
         return teacherName;
     }
@@ -54,7 +58,7 @@ public class TeacherInfo {
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName == null ? null : teacherName.trim();
     }
-
+    @NotEmpty(message="教师性别不能为空")
     public String getTeacherSex() {
         return teacherSex;
     }
@@ -62,13 +66,14 @@ public class TeacherInfo {
     public void setTeacherSex(String teacherSex) {
         this.teacherSex = teacherSex == null ? null : teacherSex.trim();
     }
-
-    public String getMoblie() {
-        return moblie;
+    @NotEmpty(message="手机号不能为空")
+    @Pattern(regexp="^1[3|4|5|7|8][0-9]{9}$",message="手机号格式不正确")
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setMoblie(String moblie) {
-        this.moblie = moblie == null ? null : moblie.trim();
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
     }
 
     public String getTeacherPwd() {
@@ -78,7 +83,7 @@ public class TeacherInfo {
     public void setTeacherPwd(String teacherPwd) {
         this.teacherPwd = teacherPwd == null ? null : teacherPwd.trim();
     }
-
+    @NotEmpty(message="专所属学院不能为空")
     public String getCollegeId() {
         return collegeId;
     }

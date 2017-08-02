@@ -3,6 +3,9 @@
 	String basePath2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path2 + "/";
 	//System.out.println(basePath);
 %>
+<script type="text/javascript">
+var basePath="<%=basePath2%>";
+</script>
 <!-- 公共JS文件 -->
 <!-- basic scripts -->
 
@@ -45,4 +48,5 @@
 		<script src="<%=basePath2 %>resources/js/ace-elements.min.js"></script>
 		<script src="<%=basePath2 %>resources/js/ace.min.js"></script>
 		<script src="<%=basePath2 %>resources/js/back/list.js"></script>
+		<script src="<%=basePath2 %>resources/js/Ecalendar.jquery.min.js"></script>
 		<!-- inline scripts related to this page -->

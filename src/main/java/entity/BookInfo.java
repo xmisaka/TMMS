@@ -3,9 +3,12 @@ package entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 @Repository
 public class BookInfo {
@@ -21,6 +24,7 @@ public class BookInfo {
 
     private String bookPublish;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date bookPublishTime;
 
     private BigDecimal bookPrice;
@@ -69,7 +73,7 @@ public class BookInfo {
         this.bookAuthor = bookAuthor == null ? null : bookAuthor.trim();
     }
     @NotEmpty(message="ISBN不能为空")
-    @Pattern(regexp="^(\\d[- ]*){9}[\\dxX]$",message="ISBN不能为空")
+    //@Pattern(regexp="^(\\d[- ]*){9}[\\dxX]$",message="ISBN的格式不正确")
     public String getBookIsbn() {
         return bookIsbn;
     }
@@ -85,7 +89,7 @@ public class BookInfo {
     public void setBookPublish(String bookPublish) {
         this.bookPublish = bookPublish == null ? null : bookPublish.trim();
     }
-    @NotEmpty(message="出版时间不能为空")
+    @NotNull(message="出版时间不能为空")
     public Date getBookPublishTime() {
         return bookPublishTime;
     }
@@ -93,7 +97,8 @@ public class BookInfo {
     public void setBookPublishTime(Date bookPublishTime) {
         this.bookPublishTime = bookPublishTime;
     }
-    @NotEmpty(message="价格不能为空")
+    @NotNull(message="价格不能为空")
+    @DecimalMin("0")
     public BigDecimal getBookPrice() {
         return bookPrice;
     }

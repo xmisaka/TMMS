@@ -22,7 +22,7 @@ public interface StudentInfoMapper {
  // 下面为自定义方法
  	List<StudentInfo> listStudent(@Param("studentInfo") StudentInfo studentInfo, @Param("page") Page page);
  	//按条件查询学生信息
-    List<StudentInfo> selectByParams(@Param("bookInfo") StudentInfo bookInfo);
+    List<StudentInfo> selectByParams(@Param("studentInfo") StudentInfo studentInfo);
     
  	int countStudent(StudentInfo studentInfo);
  	//批量插入学生信息

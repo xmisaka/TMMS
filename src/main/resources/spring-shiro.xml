@@ -36,20 +36,29 @@
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="userRealm"/>
     </bean>
-
+    
+    <!-- 退出登录过滤器 -->
+    <bean id="userLogoutFilter" class="filter.UserLogoutFilter"></bean>
+    
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login"/>
-        <property name="unauthorizedUrl" value="/login"/>
+        <property name="successUrl" value="/login"/>
+        <property name="filters">
+		  <map>
+		   <entry key="logout" value-ref="userLogoutFilter" />
+		  </map>
+		</property>
+        <property name="unauthorizedUrl" value="/error.jsp"/>
         <property name="filterChainDefinitions">
             <value>
-                /** = anon
-            </value>
+                /** = authc
+                /logout = logout
+            </value>	
         </property>
     </bean>
 
     <!-- Shiro生命周期处理器-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
- 
 </beans>

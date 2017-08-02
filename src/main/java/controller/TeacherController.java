@@ -1,23 +1,31 @@
 package controller;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import entity.CodeLibrary;
 import entity.TeacherInfo;
+import service.CodeLibraryService;
+import service.CollegeService;
 import service.TeacherService;
+import util.DateUtil;
+import util.FileUploadUtils;
 import util.Page;
 
 @Controller
@@ -27,9 +35,21 @@ public class TeacherController {
 	
 	@Autowired
 	TeacherService teacherService;
-
+	@Autowired
+	CodeLibraryService codeLibraryService;
+	@Autowired
+	CollegeService collegeService;
+	/**
+	 * 教职工列表分页查询
+	 * @param model
+	 * @param bookInfo
+	 * @param page
+	 * @param request
+	 * @return
+	 */
+	@RequiresPermissions({"teacher:view"})
 	@RequestMapping(value="/teachers")
-	public String listTeacher(Model model, @ModelAttribute TeacherInfo TeacherInfo, @ModelAttribute Page page, HttpServletRequest request) {
+	public String listTeacher(Model model, @ModelAttribute TeacherInfo teacherInfo, @ModelAttribute Page page, HttpServletRequest request) {
 		
 		String currentPageStr = request.getParameter("currentPage");
 		logger.info(currentPageStr + "===========");
@@ -38,110 +58,134 @@ public class TeacherController {
 			page.setCurrentPage(currentPage);
 		}
 		logger.info(page.toString());
-		logger.info(TeacherInfo.toString());
-		List<TeacherInfo> teachers = teacherService.listTeacher(TeacherInfo,page);
+		
+		List<CodeLibrary> listsex=codeLibraryService.selectByCodeNo("SEX");//性别列表
+		List<TeacherInfo> teachers = teacherService.listTeacher(teacherInfo, page);//教职工列表
+		model.addAttribute("sexs",listsex);
 		model.addAttribute("teachers",teachers);
 		return "teacher/teacher_list";
 	}
 	/**
-	 * 跳转教师信息添加界面
+	 * 跳转教职工信息添加界面
 	 * @param model
 	 * @return
 	 */
+	@RequiresPermissions({"teacher:add"})
 	@RequestMapping(value="/teacheradd",method=RequestMethod.GET)
-	public String addteacher(Model model){
+	public String addTeacher(Model model){
+		List<CodeLibrary> listsex=codeLibraryService.selectByCodeNo("SEX");//性别列表
+		model.addAttribute("sexs",listsex);
 		model.addAttribute(new TeacherInfo());
 		return "teacher/teacher_add";
 	}
    /**
-    * 添加教师信息
-    * @param TeacherInfo
+    * 添加教职工信息
+    * @param teacherInfo
+    * @param model
     * @param br
     * @return
     */
+	@RequiresPermissions({"teacher:add"})
     @RequestMapping(value="/teacheradd",method=RequestMethod.POST)
-	public String addteacher(@Validated TeacherInfo TeacherInfo,BindingResult br){
+	public String addTeacher(Model model,@Validated TeacherInfo teacherInfo,BindingResult br){
+    	List<CodeLibrary> listsex=codeLibraryService.selectByCodeNo("SEX");//性别列表
+		model.addAttribute("sexs",listsex);
     	if(br.hasErrors()){
     		return "teacher/teacher_add";
     	}
-    	int isOk=teacherService.insertTeacher(TeacherInfo);
-    	return "teacher/teacher_list";
+    	Date createtime=DateUtil.parseDateTime(DateUtil.getCurrentDateTimeStr());//创建时间
+    	teacherInfo.setCreateTime(createtime);
+    	teacherInfo.setUpdateTime(createtime);
+    	int isOk=teacherService.insertTeacher(teacherInfo);
+    	return "redirect:teachers";
 	}
     /**
-     * 跳转到批量添加教师页面
+     * 跳转到批量添加教职工页面
      * @return
      */
+	@RequiresPermissions({"teacher:addbatch"})
     @RequestMapping(value="/teacheraddbatch",method=RequestMethod.GET)
-    public String addTeacherBatch(){
+    public String addBookBatch(){
     	return "teacher/teacher_addbatch";
     }
     /**
-     * 批量添加教师信息
-     * @param filepath
+     * 批量添加教职工信息
+     * @param request
      * @return
      */
+	@RequiresPermissions({"teacher:addbatch"})
     @RequestMapping(value="/teacheraddbatch",method=RequestMethod.POST)
-    public String addTeacherBatch(String filepath){
-    	filepath="F://teachers/teachers.xls";
-    	File file=new File(filepath);
+    public String addBookBatch(HttpServletRequest request){
+		String filepath=FileUploadUtils.tranferFile(request, "/userfiles/xls");
+    	File file=new File(filepath);;
     	teacherService.uploadTeacherjxl(file);
     	return "teacher/teacher_list";
     }
     /**
-	 * 跳转教师修改界面
+	 * 跳转教职工修改界面
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/teacheredit",method=RequestMethod.GET)
-	public String editTeacher(Model model,int id){
-		TeacherInfo TeacherInfo=teacherService.getTeacherByID(id);
-		model.addAttribute(TeacherInfo);
-		return "teacher_edit";
+	@RequiresPermissions({"teacher:edit"})
+	@RequestMapping(value="/{id}/teacheredit",method=RequestMethod.GET)
+	public String editTeacher(Model model,@PathVariable int id){
+		TeacherInfo teacherInfo=teacherService.getTeacherByID(id);
+		List<CodeLibrary> listsex=codeLibraryService.selectByCodeNo("SEX");//性别列表
+		model.addAttribute("sexs",listsex);
+		model.addAttribute(teacherInfo);
+		return "teacher/teacher_edit";
 	}
 	/**
-     * 导出教师信息
+     * 导出教职工信息
      * @param filepath
      * @return
      */
+	@RequiresPermissions({"teacher:export"})
     @RequestMapping(value="/teacherexport",method=RequestMethod.POST)
-    public String exportTeachers(TeacherInfo TeacherInfo,HttpServletResponse response){
-        List<TeacherInfo> list=teacherService.selectByParams(TeacherInfo);
+    public String exportBooks(TeacherInfo teacherInfo,HttpServletResponse response){
+        List<TeacherInfo> list=teacherService.selectByParams(teacherInfo);
         if(list.size()>0){
         	teacherService.exportTeacher(list, response);
         }
     	return "teacher/teacher_list";
     }
    /**
-    * 修改教师信息
-    * @param TeacherInfo
+    * 修改教职工信息
+    * @param teacherInfo
     * @param br
     * @return
     */
+	@RequiresPermissions({"teacher:edit"})
     @RequestMapping(value="/teacheredit",method=RequestMethod.POST)
-	public String editTeacher(@Validated TeacherInfo TeacherInfo,BindingResult br){
+	public String editTeacher(Model model,@Validated TeacherInfo teacherInfo,BindingResult br){
+    	List<CodeLibrary> listsex=codeLibraryService.selectByCodeNo("SEX");//性别列表
+		model.addAttribute("sexs",listsex);
     	if(br.hasErrors()){
     		return "teacher/teacher_edit";
     	}
-    	int isOk=teacherService.insertTeacher(TeacherInfo);
-		return "welcome";
+    	int isOk=teacherService.editTeacher(teacherInfo);
+		return "redirect:teachers";
 	}
     /**
-     * 删除教师信息
-     * @param id
+     * 删除教职工信息
+     * @param user
+     * @param br
      * @return
      */
-     @RequestMapping(value="/teacherdel")
- 	public String delteacher(int id){
+	@RequiresPermissions({"teacher:del"})
+     @RequestMapping(value="/{id}/teacherdel")
+ 	public String delTeacher(@PathVariable int id){
     	 teacherService.deleteTeacher(id);
- 		return "teacher/teacher_list";
+ 		return "redirect:/teacher/teachers";
  	}
      /**
-      * 批量删除教师信息
+      * 批量删除教职工信息
       * @param ids
       * @return
       */
+	@RequiresPermissions({"teacher:dels"})
       @RequestMapping(value="/teachersdel")
-  	public String delteachers(int ids[]){
+  	public String delTeachers(int ids[]){
     	  teacherService.deleteTeachers(ids);
   		return "teacher/teacher_list";
   	}

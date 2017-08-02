@@ -35,9 +35,9 @@
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 设置上传文件的最大尺寸为5MB -->
-		<property name="maxUploadSize">
-			<value>5242880</value>
-		</property>
+		<property name="maxUploadSize"><value>5242880</value></property>
+		<property name="maxInMemorySize" value="4096"></property>
+        <property name="defaultEncoding" value="UTF-8"></property>
 	</bean>
 	
 	<!-- 5.数据校验 -->
@@ -60,8 +60,8 @@
          <property name="validationMessageSource" ref="messageSource" />
      </bean> 
     <!-- 6.Shiro的spring拦截器开启-->
-	<!-- <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
-	        depends-on="lifecycleBeanPostProcessor" /> -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+	        depends-on="lifecycleBeanPostProcessor" />
 	        
 	<!-- 7.定时任务的配置-->
 	<!-- 第一步、Scheduler的配置。 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 
@@ -95,5 +95,17 @@
      </bean> -->
      <!-- 第四步、业务类的配置 
     <bean id="orderJob" class="com.ylsoft.core.csm.util.OrderTask"/>-->
-    
+     <!-- 8.用户没有权限时跳转的页面和用户没登录时跳转的页面 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+	    <property name="exceptionMappings">  
+	        <props>  
+	            <prop key="org.apache.shiro.authz.UnauthorizedException"> 
+	                /error
+	            </prop>  
+	            <prop key="org.apache.shiro.authz.UnauthenticatedException">
+	                /login
+	            </prop>  
+	        </props>  
+	    </property>  
+    </bean>
 </beans>

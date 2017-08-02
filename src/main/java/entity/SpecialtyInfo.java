@@ -2,6 +2,8 @@ package entity;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class SpecialtyInfo {
     private String specialtyId;
 
@@ -28,7 +30,7 @@ public class SpecialtyInfo {
     public void setSpecialtyId(String specialtyId) {
         this.specialtyId = specialtyId == null ? null : specialtyId.trim();
     }
-
+    @NotEmpty(message="学院名不能为空")
     public String getCollegeId() {
         return collegeId;
     }
@@ -36,15 +38,15 @@ public class SpecialtyInfo {
     public void setCollegeId(String collegeId) {
         this.collegeId = collegeId == null ? null : collegeId.trim();
     }
-
+    @NotEmpty(message="专业名不能为空")
     public String getSpecialtyName() {
         return specialtyName;
     }
-
+    
     public void setSpecialtyName(String specialtyName) {
         this.specialtyName = specialtyName == null ? null : specialtyName.trim();
     }
-
+    @NotEmpty(message="学制不能为空")
     public String getSchsys() {
         return schsys;
     }

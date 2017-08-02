@@ -1,6 +1,8 @@
 <!-- 顶部导航栏 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@page import="entity.TmmsUser" %>
+	<%TmmsUser user =(TmmsUser)session.getAttribute("tmmsUser"); %>
 <div class="navbar navbar-default" id="navbar">
 			<script type="text/javascript">
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
@@ -33,7 +35,7 @@
 						</li>
 
 						<li>
-							<a href="#">
+							<a href="<%=request.getContextPath() %>/logout">
 								<i class="icon-power-off"></i>退出系统
 							</a>
 						</li>

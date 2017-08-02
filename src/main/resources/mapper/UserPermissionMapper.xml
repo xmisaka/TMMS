@@ -27,10 +27,10 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user_permission (id, permission_name, permission_description, 
+    insert into user_permission (permission_name, permission_description, 
       create_time, update_time, extend1, 
       extend2)
-    values (#{id,jdbcType=INTEGER}, #{permissionName,jdbcType=VARCHAR}, #{permissionDescription,jdbcType=VARCHAR}, 
+    values ( #{permissionName,jdbcType=VARCHAR}, #{permissionDescription,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{extend1,jdbcType=VARCHAR}, 
       #{extend2,jdbcType=VARCHAR})
   </insert>
@@ -40,7 +40,6 @@
     </selectKey>
     insert into user_permission
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      id,
       <if test="permissionName != null" >
         permission_name,
       </if>
@@ -61,7 +60,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{id,jdbcType=INTEGER},
       <if test="permissionName != null" >
         #{permissionName,jdbcType=VARCHAR},
       </if>
@@ -116,4 +114,51 @@
       extend2 = #{extend2,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <!-- 一下为自定义方法 -->
+  <select id="listUserPermission" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from user_permission
+  	<where>
+  		<if test="userPermission.permissionName != null and !&quot;&quot;.equals(userPermission.permissionName.trim())">
+  			and permission_name = #{userPermission.permissionName}
+  		</if>
+  		<if test="userPermission.permissionDescription != null and !&quot;&quot;.equals(userPermission.permissionDescription.trim())">
+  			and state = #{userPermission.state}
+  		</if>
+  	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
+  	
+  </select>
+  
+  <select id="selectByParams" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from user_permission
+  	<where>
+  		<if test="userPermission.permissionName != null and !&quot;&quot;.equals(userPermission.permissionName.trim())">
+  			and permission_name = #{userPermission.permissionName}
+  		</if>
+  		<if test="userPermission.permissionDescription != null and !&quot;&quot;.equals(userPermission.permissionDescription.trim())">
+  			and state = #{userPermission.state}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="countUserPermission" resultType="int" parameterType="entity.UserRole">
+  	select count(*) from user_permission
+  	<where>
+  		<if test="permissionName != null and !&quot;&quot;.equals(permissionName.trim())">
+  			and permission_name = #{permissionName}
+  		</if>
+  		<if test="permissionDescription != null and !&quot;&quot;.equals(permissionDescription.trim())">
+  			and state = #{state}
+  		</if>
+  	</where>
+  </select>
+  
+   <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_permission
+  </select>
 </mapper>

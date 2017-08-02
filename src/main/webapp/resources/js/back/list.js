@@ -88,10 +88,14 @@ function doSubmit(){
 	document.getElementById("addForm").submit();
 }
 /**
- * list页面根据id的值判断查询还是导出
+ * list页面根据id的值判断查询,导入还是导出
  * 
  */
 $("input[type=button]").click(function(){
 	var type=$(this).attr("id");
-    $("#Paramform").attr("action",type).submit();
+	if(type.indexOf("addbatch")==-1){
+		$("#Paramform").attr("action",type).submit();
+	}else{
+		window.location.href=type;
+	}
 })
