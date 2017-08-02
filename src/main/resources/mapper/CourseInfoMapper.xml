@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.CourseInfoMapper" >
+  <resultMap id="BaseResultMap" type="entity.CourseInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="course_no" property="courseNo" jdbcType="VARCHAR" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+    <result column="course_grade" property="courseGrade" jdbcType="VARCHAR" />
+    <result column="course_term" property="courseTerm" jdbcType="VARCHAR" />
+    <result column="college_id" property="collegeId" jdbcType="VARCHAR" />
+    <result column="specialty_id" property="specialtyId" jdbcType="VARCHAR" />
+    <result column="course_kind" property="courseKind" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="extend1" property="extend1" jdbcType="VARCHAR" />
+    <result column="extend2" property="extend2" jdbcType="VARCHAR" />
+    <result column="extend3" property="extend3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, course_no, course_name, course_grade, course_term, college_id, specialty_id, 
+    course_kind, createtime, updatetime, extend1, extend2, extend3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from course_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="entity.CourseInfo" >
+    insert into course_info (course_no, course_name, 
+      course_grade, course_term, college_id, 
+      specialty_id, course_kind, createtime, 
+      updatetime, extend1, extend2, 
+      extend3)
+    values (#{courseNo,jdbcType=VARCHAR}, #{courseName,jdbcType=VARCHAR}, 
+      #{courseGrade,jdbcType=VARCHAR}, #{courseTerm,jdbcType=VARCHAR}, #{collegeId,jdbcType=VARCHAR}, 
+      #{specialtyId,jdbcType=VARCHAR}, #{courseKind,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{extend1,jdbcType=VARCHAR}, #{extend2,jdbcType=VARCHAR}, 
+      #{extend3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.CourseInfo" >
+    insert into course_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseNo != null" >
+        course_no,
+      </if>
+      <if test="courseName != null" >
+        course_name,
+      </if>
+      <if test="courseGrade != null" >
+        course_grade,
+      </if>
+      <if test="courseTerm != null" >
+        course_term,
+      </if>
+      <if test="collegeId != null" >
+        college_id,
+      </if>
+      <if test="specialtyId != null" >
+        specialty_id,
+      </if>
+      <if test="courseKind != null" >
+        course_kind,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="extend1 != null" >
+        extend1,
+      </if>
+      <if test="extend2 != null" >
+        extend2,
+      </if>
+      <if test="extend3 != null" >
+        extend3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseNo != null" >
+        #{courseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseGrade != null" >
+        #{courseGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTerm != null" >
+        #{courseTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null" >
+        #{collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="specialtyId != null" >
+        #{specialtyId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseKind != null" >
+        #{courseKind,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend1 != null" >
+        #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null" >
+        #{extend3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.CourseInfo" >
+    update course_info
+    <set >
+      <if test="courseNo != null" >
+        course_no = #{courseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null" >
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseGrade != null" >
+        course_grade = #{courseGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTerm != null" >
+        course_term = #{courseTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null" >
+        college_id = #{collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="specialtyId != null" >
+        specialty_id = #{specialtyId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseKind != null" >
+        course_kind = #{courseKind,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend1 != null" >
+        extend1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        extend2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null" >
+        extend3 = #{extend3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.CourseInfo" >
+    update course_info
+    set course_no = #{courseNo,jdbcType=VARCHAR},
+      course_name = #{courseName,jdbcType=VARCHAR},
+      course_grade = #{courseGrade,jdbcType=VARCHAR},
+      course_term = #{courseTerm,jdbcType=VARCHAR},
+      college_id = #{collegeId,jdbcType=VARCHAR},
+      specialty_id = #{specialtyId,jdbcType=VARCHAR},
+      course_kind = #{courseKind,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      extend1 = #{extend1,jdbcType=VARCHAR},
+      extend2 = #{extend2,jdbcType=VARCHAR},
+      extend3 = #{extend3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   <!-- 一下为自定义方法 -->
+  <select id="listCourse" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from course_info
+  	<where>
+  		<if test="courseInfo.courseNo != null and !&quot;&quot;.equals(courseInfo.courseNo.trim())">
+  			and course_no = #{courseInfo.courseNo}
+  		</if>
+  		<if test="courseInfo.courseName != null and !&quot;&quot;.equals(courseInfo.courseName.trim())">
+  			and course_name = #{courseInfo.courseName}
+  		</if>
+  		<if test="courseInfo.courseGrade != null and !&quot;&quot;.equals(courseInfo.courseGrade.trim())">
+  			and course_grade = #{courseInfo.courseGrade}
+  		</if>
+  		<if test="courseInfo.courseTerm != null and !&quot;&quot;.equals(courseInfo.courseTerm.trim())">
+  			and course_term = #{courseInfo.courseTerm}
+  		</if>
+  		<if test="courseInfo.collegeId != null and !&quot;&quot;.equals(courseInfo.collegeId.trim())">
+  			and college_id = #{courseInfo.collegeId}
+  		</if>
+  		<if test="courseInfo.specialtyId != null and !&quot;&quot;.equals(courseInfo.specialtyId.trim())">
+  			and specialty_id = #{courseInfo.specialtyId}
+  		</if>
+  		<if test="courseInfo.courseKind != null and !&quot;&quot;.equals(courseInfo.courseKind.trim())">
+  			and course_kind = #{courseInfo.courseKind}
+  		</if>
+  	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
+  	
+  </select>
+  
+  <select id="selectByParams" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from course_info
+  	<where>
+  				<if test="courseInfo.courseNo != null and !&quot;&quot;.equals(courseInfo.courseNo.trim())">
+  			and course_no = #{courseInfo.courseNo}
+  		</if>
+  		<if test="courseInfo.courseName != null and !&quot;&quot;.equals(courseInfo.courseName.trim())">
+  			and course_name = #{courseInfo.courseName}
+  		</if>
+  		<if test="courseInfo.courseGrade != null and !&quot;&quot;.equals(courseInfo.courseGrade.trim())">
+  			and course_grade = #{courseInfo.courseGrade}
+  		</if>
+  		<if test="courseInfo.courseTerm != null and !&quot;&quot;.equals(courseInfo.courseTerm.trim())">
+  			and course_term = #{courseInfo.courseTerm}
+  		</if>
+  		<if test="courseInfo.collegeId != null and !&quot;&quot;.equals(courseInfo.collegeId.trim())">
+  			and college_id = #{courseInfo.collegeId}
+  		</if>
+  		<if test="courseInfo.specialtyId != null and !&quot;&quot;.equals(courseInfo.specialtyId.trim())">
+  			and specialty_id = #{courseInfo.specialtyId}
+  		</if>
+  		<if test="courseInfo.courseKind != null and !&quot;&quot;.equals(courseInfo.courseKind.trim())">
+  			and course_kind = #{courseInfo.courseKind}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="countCourse" resultType="int" parameterType="entity.CourseInfo">
+  	select count(*) from course_info
+  	<where>
+  		<if test="courseNo != null and !&quot;&quot;.equals(courseNo.trim())">
+  			and course_no = #{courseNo}
+  		</if>
+  		<if test="courseName != null and !&quot;&quot;.equals(courseName.trim())">
+  			and course_name = #{courseName}
+  		</if>
+  		<if test="courseGrade != null and !&quot;&quot;.equals(courseGrade.trim())">
+  			and course_grade = #{courseGrade}
+  		</if>
+  		<if test="courseTerm != null and !&quot;&quot;.equals(courseTerm.trim())">
+  			and course_term = #{courseTerm}
+  		</if>
+  		<if test="collegeId != null and !&quot;&quot;.equals(collegeId.trim())">
+  			and college_id = #{collegeId}
+  		</if>
+  		<if test="specialtyId != null and !&quot;&quot;.equals(specialtyId.trim())">
+  			and specialty_id = #{specialtyId}
+  		</if>
+  		<if test="courseKind != null and !&quot;&quot;.equals(courseKind.trim())">
+  			and course_kind = #{courseKind}
+  		</if>
+  	</where>
+  </select>
+  
+  <insert id="insertCourseBatch" parameterType="java.util.List">
+		  insert into course_info (course_id,course_name,course_grade,course_term,college_id,specialty_id,course_kind,create_time,update_time)
+		        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.courseNo,jdbcType=VARCHAR},
+             #{item.courseName,jdbcType=VARCHAR},
+             #{item.courseGrade,jdbcType=VARCHAR},
+             #{item.courseTerm,jdbcType=VARCHAR},
+             #{item.collegeId,jdbcType=VARCHAR},
+             #{item.specialtyId,jdbcType=VARCHAR},
+             #{item.courseKind,jdbcType=VARCHAR},
+             #{item.createTime,jdbcType=TIMESTAMP},
+             #{item.updateTime,jdbcType=TIMESTAMP}
+             )
+        </foreach>
+  </insert>
+</mapper>
