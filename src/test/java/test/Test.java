@@ -33,7 +33,13 @@ public class Test {
         	System.out.println(in);
         }
         System.out.println(Class.class.getClass().getResource("/").getPath());
-        
+        try {
+			Class Classc1=Class.forName("BookInfo");
+			System.out.println(Classc1);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 }

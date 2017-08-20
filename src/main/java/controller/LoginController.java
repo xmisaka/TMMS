@@ -25,7 +25,17 @@ public class LoginController extends LogoutFilter{
 	TmmsUserService tmmsUserService;
 	 @RequestMapping(value="/login",method=RequestMethod.GET)
     public String login(){
-        return "login";
+		Subject subject=SecurityUtils.getSubject();
+		if (subject.isAuthenticated()) {  
+            return "redirect:welcome";  
+        }else{
+        	return "login";
+        }
+    }
+	 
+	@RequestMapping(value="/welcome",method=RequestMethod.GET)
+    public String welcome(){
+        return "welcome";
     }
     
     @RequestMapping(value="/login",method=RequestMethod.POST)
@@ -34,8 +44,16 @@ public class LoginController extends LogoutFilter{
 		String username = request.getParameter("userName");
 		String password = request.getParameter("password");
 		
+		if("".equals(username)){
+			 model.addAttribute("errorMsg", "请填写用户名");
+			 return "login";
+		}
+		if("".equals(password)){
+			 model.addAttribute("errorMsg", "请填写密码");
+			 return "login";
+		}
 		if (subject.isAuthenticated()) {  
-            return "weclome";  
+            return "welcome";  
         }  
 		//logger.info(userService.getByUserName(username).getUserName() + "+" + password);
 		
@@ -44,7 +62,7 @@ public class LoginController extends LogoutFilter{
 		try{
 			subject.login(token);
 		}catch(Exception e){
-		    model.addAttribute("errorMsg", "用户名/密码错误");
+		    model.addAttribute("errorMsg", "用户名或密码错误");
 		    return "login";
 		}
 		TmmsUser tmmsUser = tmmsUserService.getByUserName(username);

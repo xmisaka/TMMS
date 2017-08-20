@@ -13,6 +13,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
 import dao.TmmsUserMapper;
@@ -36,6 +37,7 @@ public class TmmsUserServiceImpl implements TmmsUserService {
 	 * @param userName
 	 * @return
 	 */
+ 	@CachePut(value="userCache")
 	@Override
     public TmmsUser getByUserName(String username){
 		return tmmsUserMapper.getByUserName(username);
@@ -54,6 +56,7 @@ public class TmmsUserServiceImpl implements TmmsUserService {
 	 * @param userName
 	 * @return
 	 */
+ 	@CachePut(value="userCache")
 	@Override
 	public Set<String> getPermissions(String username){
 		Set<String> set1=tmmsUserMapper.getPermissions(username);
@@ -70,6 +73,7 @@ public class TmmsUserServiceImpl implements TmmsUserService {
 	 * @param page
 	 * @return
 	 */
+ 	@CachePut(value="userCache")
 	@Override
 	public List<TmmsUser> listTmmsUser(TmmsUser tmmsUser, Page page) {
 		int totalNumber = tmmsUserMapper.countTmmsUser(tmmsUser);

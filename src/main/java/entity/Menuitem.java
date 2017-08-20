@@ -7,103 +7,104 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class Menuitem {
-    private Integer id;
 
-    private Integer parentId;
+	private Integer id;
 
-    private String menuName;
+	private Integer parentId;
 
-    private String uri;
+	private String menuName;
 
-    private String icon;
+	private String uri;
 
-    private String valid;
+	private String icon;
 
-    private Date createTime;
+	private String valid;
 
-    private Date updataTime;
+	private Date createTime;
 
-    private String extend1;
+	private Date updataTime;
 
-    private String extend2;
+	private String extend1;
 
-    public Integer getId() {
-        return id;
-    }
+	private String extend2;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    @NotNull(message="上级菜单不能为空")
-    public Integer getParentId() {
-        return parentId;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
-    @NotEmpty(message="菜单名s不能为空")
-    public String getMenuName() {
-        return menuName;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setMenuName(String menuName) {
-        this.menuName = menuName == null ? null : menuName.trim();
-    }
- 
-    public String getUri() {
-        return uri;
-    }
+	public Integer getParentId() {
+		return parentId;
+	}
 
-    public void setUri(String uri) {
-        this.uri = uri == null ? null : uri.trim();
-    }
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
 
-    public String getIcon() {
-        return icon;
-    }
+	public String getMenuName() {
+		return menuName;
+	}
 
-    public void setIcon(String icon) {
-        this.icon = icon == null ? null : icon.trim();
-    }
+	public void setMenuName(String menuName) {
+		this.menuName = menuName == null ? null : menuName.trim();
+	}
 
-    public String getValid() {
-        return valid;
-    }
+	public String getUri() {
+		return uri;
+	}
 
-    public void setValid(String valid) {
-        this.valid = valid == null ? null : valid.trim();
-    }
+	public void setUri(String uri) {
+		this.uri = uri == null ? null : uri.trim();
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public String getIcon() {
+		return icon;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setIcon(String icon) {
+		this.icon = icon == null ? null : icon.trim();
+	}
 
-    public Date getUpdataTime() {
-        return updataTime;
-    }
+	public String getValid() {
+		return valid;
+	}
 
-    public void setUpdataTime(Date updataTime) {
-        this.updataTime = updataTime;
-    }
+	public void setValid(String valid) {
+		this.valid = valid == null ? null : valid.trim();
+	}
 
-    public String getExtend1() {
-        return extend1;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setExtend1(String extend1) {
-        this.extend1 = extend1 == null ? null : extend1.trim();
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public String getExtend2() {
-        return extend2;
-    }
+	public Date getUpdataTime() {
+		return updataTime;
+	}
 
-    public void setExtend2(String extend2) {
-        this.extend2 = extend2 == null ? null : extend2.trim();
-    }
+	public void setUpdataTime(Date updataTime) {
+		this.updataTime = updataTime;
+	}
+
+	public String getExtend1() {
+		return extend1;
+	}
+
+	public void setExtend1(String extend1) {
+		this.extend1 = extend1 == null ? null : extend1.trim();
+	}
+
+	public String getExtend2() {
+		return extend2;
+	}
+
+	public void setExtend2(String extend2) {
+		this.extend2 = extend2 == null ? null : extend2.trim();
+	}
 }

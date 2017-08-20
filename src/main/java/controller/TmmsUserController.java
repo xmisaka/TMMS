@@ -1,14 +1,13 @@
 package controller;
 
-import java.io.File;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +33,7 @@ public class TmmsUserController {
 	@Autowired
 	UserRoleService userRoleService;
 	
+	@CachePut(value="userCache")
 	@RequestMapping(value="/tmmsusers")
 	public String listTmmsUser(Model model, @ModelAttribute TmmsUser tmmsUser, @ModelAttribute Page page, HttpServletRequest request) {
 		
@@ -92,6 +92,19 @@ public class TmmsUserController {
     public String addTmmsUserBatch(){
     	return "tmmsuser/tmmsuser_addbatch";
     }
+    /**
+   	 * 个人资料
+   	 * @param model
+   	 * @return
+   	 */
+   	@RequestMapping(value="/{id}/tmmsuserinfo",method=RequestMethod.GET)
+   	public String tmmsUserInfo(Model model,@PathVariable int id){
+   		List<UserRole> userroles=userRoleService.selectAll();
+   		model.addAttribute("userroles", userroles);
+   		TmmsUser tmmsUser=tmmsUserService.getTmmsUserByID(id);
+   		model.addAttribute(tmmsUser);
+   		return "tmmsuser/userinfo";
+   	}
     /**
 	 * 跳转用户修改界面
 	 * @param model

@@ -14,7 +14,7 @@
     
     <!-- 缓存管理器 使用Ehcache实现 -->
     <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-        <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/>
+        <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"/>
     </bean>
 
     <!-- 凭证匹配器 -->
@@ -44,7 +44,7 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login"/>
-        <property name="successUrl" value="/login"/>
+        <property name="successUrl" value="/welcome"/>
         <property name="filters">
 		  <map>
 		   <entry key="logout" value-ref="userLogoutFilter" />
@@ -52,9 +52,16 @@
 		</property>
         <property name="unauthorizedUrl" value="/error.jsp"/>
         <property name="filterChainDefinitions">
+         <!-- 拦截顺序是按照写的顺序从上到下,拦截后就不再往下执行 -->
             <value>
-                /** = authc
+                <!-- 某个角色的访问权限-->
+                /stu/** = roles[admin]
+                <!-- 静态资源访问权限 -->
+                /resources/** =anon
+                <!-- 退出登录过滤器-->
                 /logout = logout
+                <!-- 登录拦截-->
+                /** = authc
             </value>	
         </property>
     </bean>

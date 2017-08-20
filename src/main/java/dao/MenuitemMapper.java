@@ -5,7 +5,8 @@ import java.util.List;
 import entity.Menuitem;
 
 public interface MenuitemMapper {
-    int deleteByPrimaryKey(Integer id);
+
+	int deleteByPrimaryKey(Integer id);
 
     int insert(Menuitem record);
 
