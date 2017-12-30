@@ -11,11 +11,11 @@ import util.Page;
 public interface CollegeService {
 	/**
 	 * 根据输入信息条件查询院系列表，并分页显示
-	 * @param studentInfo
+	 * @param collegeInfo
 	 * @param page
 	 * @return
 	 */
-	List<CollegeInfo> listCollege(CollegeInfo studentInfo, Page page);
+	List<CollegeInfo> listCollege(CollegeInfo collegeInfo, Page page);
 	
 	/**
 	 * 批量导入院系信息
@@ -29,10 +29,10 @@ public interface CollegeService {
 	void uploadCollegejxl(File file);
 	/**
 	 * 按条件查询院系信息
-	 * @param studentInfo
+	 * @param collegeInfo
 	 * @return
 	 */
-	List<CollegeInfo> selectByParams(CollegeInfo studentInfo);
+	List<CollegeInfo> selectByParams(CollegeInfo collegeInfo);
 	/**
 	 * 批量导出院系信息
 	 * @param list
@@ -41,15 +41,15 @@ public interface CollegeService {
 	void exportCollege(List<CollegeInfo> list,HttpServletResponse response);
 	/**
 	 * 修改一条院系信息
-	 * @param studentInfo
+	 * @param collegeInfo
 	 * @return
 	 */
-	int editCollege(CollegeInfo studentInfo);
+	int editCollege(CollegeInfo collegeInfo);
 	/**
 	 * 添加一条院系信息
 	 * @param bookInfo
 	 */
-	int insertCollege(CollegeInfo studentInfo);
+	int insertCollege(CollegeInfo collegeInfo);
 	
 	/**
 	 * 删除一条院系信息
@@ -69,4 +69,9 @@ public interface CollegeService {
 	 * @return
 	 */
 	CollegeInfo getCollegeByID(String collegeId);
+	/**
+	 * 查询全部学院
+	 * @return
+	 */
+	List<CollegeInfo> selectAll();
 }

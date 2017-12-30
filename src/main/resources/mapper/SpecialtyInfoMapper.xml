@@ -100,6 +100,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="entity.SpecialtyInfo" >
     update specialty_info
     <set >
+      <if test="specialtyId != null" >
+        specialty_id = #{specialtyId,jdbcType=VARCHAR},
+      </if>
       <if test="collegeId != null" >
         college_id = #{collegeId,jdbcType=VARCHAR},
       </if>
@@ -129,7 +132,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="entity.SpecialtyInfo" >
     update specialty_info
-    set college_id = #{collegeId,jdbcType=VARCHAR},
+    set specialty_id = #{specialtyId,jdbcType=VARCHAR},
+      college_id = #{collegeId,jdbcType=VARCHAR},
       specialty_name = #{specialtyName,jdbcType=VARCHAR},
       schsys = #{schsys,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -139,4 +143,74 @@
       extend3 = #{extend3,jdbcType=VARCHAR}
     where specialty_id = #{specialtyId,jdbcType=VARCHAR}
   </update>
+  <!-- 一下为自定义方法 -->
+  <select id="listSpecialty" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from specialty_info
+  	<where>
+  		<if test="specialtyInfo.collegeId != null and !&quot;&quot;.equals(specialtyInfo.collegeId.trim())">
+  			and college_id = #{specialtyInfo.collegeId}
+  		</if>
+  		<if test="specialtyInfo.specialtyName != null and !&quot;&quot;.equals(specialtyInfo.specialtyName.trim())">
+  			and specialty_name = #{specialtyInfo.specialtyName}
+  		</if>
+  		<if test="specialtyInfo.schsys != null and !&quot;&quot;.equals(specialtyInfo.schsys.trim())">
+  			and schsys = #{specialtyInfo.schsys}
+  		</if>
+  	</where>order by specialty_id limit #{page.dbIndex},#{page.dbNumber}
+  	
+  </select>
+  
+  <select id="selectByParams" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from specialty_info
+  	<where>
+  		<if test="specialtyInfo.collegeId != null and !&quot;&quot;.equals(specialtyInfo.collegeId.trim())">
+  			and college_id = #{specialtyInfo.collegeId}
+  		</if>
+  		<if test="specialtyInfo.specialtyName != null and !&quot;&quot;.equals(specialtyInfo.specialtyName.trim())">
+  			and specialty_name = #{specialtyInfo.specialtyName}
+  		</if>
+  		<if test="specialtyInfo.schsys != null and !&quot;&quot;.equals(specialtyInfo.schsys.trim())">
+  			and schsys = #{specialtyInfo.schsys}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="countSpecialty" resultType="int" parameterType="entity.SpecialtyInfo">
+  	select count(*) from specialty_info
+  	<where>
+  		<if test="collegeId != null and !&quot;&quot;.equals(collegeId.trim())">
+  			and college_id = #{specialtyInfo.collegeId}
+  		</if>
+  		<if test="specialtyName != null and !&quot;&quot;.equals(specialtyName.trim())">
+  			and specialty_name = #{specialtyName}
+  		</if>
+  		<if test="schsys != null and !&quot;&quot;.equals(schsys.trim())">
+  			and schsys = #{schsys}
+  		</if>
+  	</where>
+  </select>
+  
+  <insert id="insertSpecialtyBatch" parameterType="java.util.List">
+		  insert into specialty_info (specialtyId,collegeId,specialtyName,schsys,create_time,update_time)
+		        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.specialtyId,jdbcType=VARCHAR},
+             #{item.collegeId,jdbcType=VARCHAR},
+             #{item.specialtyName,jdbcType=VARCHAR},
+             #{item.schsys,jdbcType=VARCHAR},
+             #{item.createTime,jdbcType=TIMESTAMP},
+             #{item.updateTime,jdbcType=TIMESTAMP}
+             )
+        </foreach>
+  </insert>
+  <select id="selectByCollegeId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from specialty_info
+    where college_id = #{collegeId,jdbcType=VARCHAR}
+  </select>
 </mapper>

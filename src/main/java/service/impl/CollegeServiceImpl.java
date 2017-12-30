@@ -36,7 +36,7 @@ public class CollegeServiceImpl implements CollegeService {
 	@Autowired
 	CollegeInfoMapper collegeInfoMapper;
 	/**
-	 * 根据输入信息条件查询学生列表，并分页显示
+	 * 根据输入信息条件查询院系列表，并分页显示
 	 * @param bookInfo
 	 * @param page
 	 * @return
@@ -49,7 +49,7 @@ public class CollegeServiceImpl implements CollegeService {
 		return colleges;
 	}
 	/**
-	 * 批量导入学生信息
+	 * 批量导入院系信息
 	 * @param file
 	 
 	@Override
@@ -83,7 +83,7 @@ public class CollegeServiceImpl implements CollegeService {
 	                            	}
 	                            	if(j==0){//学号
 	                            		collegeInfo.setCollegeNo(value.substring(0,value.indexOf(".")));
-	                            	}else if(j==1){//学生姓名
+	                            	}else if(j==1){//院系姓名
 	                            		collegeInfo.setCollegeName(value.substring(0,value.indexOf(".")));
 	                            	}else if(j==2){//性别
 	                            		collegeInfo.setCollegeSex(value.substring(0,value.indexOf(".")));
@@ -114,7 +114,7 @@ public class CollegeServiceImpl implements CollegeService {
 	                        		value2 = cell.getStringCellValue();
 	                        		if(j==0){//学号
 	                            		collegeInfo.setCollegeNo(value2);
-	                            	}else if(j==1){//学生姓名
+	                            	}else if(j==1){//院系姓名
 	                            		collegeInfo.setCollegeName(value2);
 	                            	}else if(j==2){//性别
 	                            		collegeInfo.setCollegeSex(value2);
@@ -179,7 +179,7 @@ public class CollegeServiceImpl implements CollegeService {
 		}
 	}*/
 	/**
-	 * 添加一位学生信息
+	 * 添加一位院系信息
 	 * @param bookInfo
 	 */
 	@Override
@@ -189,7 +189,7 @@ public class CollegeServiceImpl implements CollegeService {
 
 	}
 	/**
-	 * 修改一位学生信息
+	 * 修改一位院系信息
 	 * @param collegeInfo
 	 * @return
 	 */
@@ -199,7 +199,7 @@ public class CollegeServiceImpl implements CollegeService {
     	return collegeInfoMapper.updateByPrimaryKey(collegeInfo);
     }
     /**
-	 * 删除一位学生信息
+	 * 删除一位院系信息
 	 * @param id
 	 */
 	@Override
@@ -209,7 +209,7 @@ public class CollegeServiceImpl implements CollegeService {
 	}
 
 	/**
-	 * 批量删除学生信息
+	 * 批量删除院系信息
 	 * @param ids
 	 */
 	@Override
@@ -221,7 +221,7 @@ public class CollegeServiceImpl implements CollegeService {
 	}
 
 	/**
-	 * 根据ID获取学生信息
+	 * 根据ID获取院系信息
 	 * @param id
 	 * @return
 	 */
@@ -231,7 +231,7 @@ public class CollegeServiceImpl implements CollegeService {
 		return collegeInfoMapper.selectByPrimaryKey(collegeId);
 	}
 	/**
-	 * 批量导入学生信息
+	 * 批量导入院系信息
 	 * @param file
 	 */
 	@Override
@@ -241,10 +241,11 @@ public class CollegeServiceImpl implements CollegeService {
 		try {
 			InputStream in = new FileInputStream(file);
 			LinkedHashMap<String, String> fieldMap=new LinkedHashMap<String, String>();
+			fieldMap.put("学院Id", "collegeId");
 			fieldMap.put("学院名字", "collegeName");
 			fieldMap.put("学院负责人", "collegePrincipal");
 			fieldMap.put("所属学校", "school");
-			String uniqueFields[]={"学号"};
+			String uniqueFields[]={"学院Id"};
 			list=JxlExcelUtil.excelToList(in, "Sheet1", CollegeInfo.class, fieldMap, uniqueFields);
 			
 		} catch (FileNotFoundException e) {
@@ -265,7 +266,7 @@ public class CollegeServiceImpl implements CollegeService {
 		}
 	}
 	/**
-	 * 按条件查询学生信息
+	 * 按条件查询院系信息
 	 * @param collegeInfo
 	 * @return
 	 */
@@ -275,7 +276,7 @@ public class CollegeServiceImpl implements CollegeService {
 		return collegeInfoMapper.selectByParams(collegeInfo);
 	}
 	/**
-	 * 批量导出学生信息
+	 * 批量导出院系信息
 	 * @param list
 	 * @param response
 	 */
@@ -296,6 +297,11 @@ public class CollegeServiceImpl implements CollegeService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	@Override
+	public List<CollegeInfo> selectAll() {
+		// TODO Auto-generated method stub
+		return collegeInfoMapper.selectAll();
 	}
 	 
 }

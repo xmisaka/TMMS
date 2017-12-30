@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@page import="util.DateUtil" %>
 <!DOCTYPE html>
 
 <html>
@@ -47,7 +46,7 @@
 
 						<ul class="breadcrumb">
 							<li><i class="icon-home home-icon"></i> <a href="#">首页</a></li>
-							<li class="active">教材书目批量添加</li>
+							<li class="active">教材书目</li>
 						</ul>
 						<!-- .breadcrumb -->
 					</div>
@@ -57,16 +56,17 @@
 						<div class="row">
 							<div class="col-xs-12">
 
-								<sf:form action="bookaddbatch" method="post" id="bookForm"
-									class="form-horizontal">
-									<div class="form-group">
-										<label class="col-sm-1 contorl-label text-right">选择文件</label>
-										<div class="col-sm-2">
-											<input type="file" class="col-xs-12" id="filepath"
-												name="filepath" value="">
-										</div>
-										<input type="submit" value="上传" />
-									</div>
+								<sf:form action="bookaddbatch" method="post" id="Paramform"
+									class="form-horizontal" enctype="multipart/form-data">
+									<div class=" col-xs-12 table-header">书籍批量添加<a href="books" style="float:right;color:#fff;">返回书籍列表</a></div>
+                                    <table id="dynamic-table">
+								      <tr>
+								        <td><input type="file" name="file" id="uploadfile"> </td>
+								      </tr>
+								      <tr>
+								        <td><input type="submit" value="提交"></td>
+								      </tr>
+									</table>
 								</sf:form>
 							</div>
 						</div>

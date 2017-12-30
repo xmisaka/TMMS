@@ -3,7 +3,14 @@
 	String basePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path1 + "/";
 	//System.out.println(basePath);
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib prefix="code" uri="/code-tags"%>
+<%@ taglib prefix="location" uri="/location-tags"%>
+<%@ taglib prefix="menu" uri="/menu-tags"%>
 <!-- 公共css文件 -->
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <!-- basic styles -->
 <link href="<%=basePath1 %>resources/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="<%=basePath1 %>resources/css/font-awesome.min.css" />
@@ -15,6 +22,7 @@
 <link rel="stylesheet" href="<%=basePath1 %>resources/css/ace.min.css" />
 <link rel="stylesheet" href="<%=basePath1 %>resources/css/ace-rtl.min.css" />
 <link rel="stylesheet" href="<%=basePath1 %>resources/css/ace-skins.min.css" />
+<link rel="stylesheet" href="<%=basePath1 %>resources/css/style.css" />
 <!--[if lte IE 8]>
   <link rel="stylesheet" href="<%=basePath1 %>resources/css/ace-ie.min.css" />
 <![endif]-->

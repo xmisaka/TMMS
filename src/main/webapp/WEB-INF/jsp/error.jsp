@@ -56,18 +56,17 @@
 										<i class="icon-remove"></i>
 									</button>
 
-									<i class="icon-ok green"></i>
+									<i class="icon-remove red" style="font-size:18px;"></i>
 
-									欢迎使用
-									<strong class="green">
-										教材管理系统
-										<small>(v1.0)</small>
+									
+									<strong class="red" style="font-size:18px;" >
+										对不起,您没有权限访问此页面
+										<small></small>
 									</strong>
-									,今天是2017年6月13日 星期二。	
+									
 								</div>
 
 									<div class="col-sm-12">
-										<script src="https://sslapi.hitokoto.cn/"></script>
 									</div><!-- /span -->
 									
 								<!-- PAGE CONTENT ENDS -->

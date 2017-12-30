@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@page import="util.*" %>
 <!DOCTYPE html>
 
 <html>
@@ -47,7 +46,7 @@
 
 						<ul class="breadcrumb">
 							<li><i class="icon-home home-icon"></i> <a href="#">首页</a></li>
-							<li class="active">教材书目</li>
+							<li class="active">学生信息</li>
 						</ul>
 						<!-- .breadcrumb -->
 					</div>
@@ -57,14 +56,14 @@
 						<div class="row">
 							<div class="col-xs-12">
 
-								<sf:form action="books" method="post" id="Paramform"
+								<sf:form action="students" method="post" id="Paramform"
 									class="form-horizontal">
 									<input type="hidden" name="currentPage" id="currentPage" value="1" />
 									<div class=" col-xs-12 table-header">学生列表</div>
 									<div class="form-group col-sm-2">
 										<label> 每页条数 <select name="pageNumber">
 												<option value="10"
-													<c:if test="${page.pageNumber == 10}"> selected="selected"</c:if>>2</option>
+													<c:if test="${page.pageNumber == 10}"> selected="selected"</c:if>>10</option>
 												<option value="25"
 													<c:if test="${page.pageNumber == 25}"> selected="selected"</c:if>>25</option>
 												<option value="50"
@@ -75,49 +74,82 @@
 										</label>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-1 contorl-label text-right">ISBN编号</label>
+										<label class="col-sm-1 contorl-label text-right">学号</label>
 										<div class="col-sm-2">
-											<input type="text" class="col-xs-12" id="isbn"
-												name="bookIsbn" value="${bookInfo.bookIsbn }">
+											<input type="text" class="col-xs-12"
+												name="studentNo" value="${studentInfo.studentNo }">
 										</div>
 
-										<label class="col-sm-1 text-right">书籍名称</label>
+										<label class="col-sm-1 text-right">姓名</label>
 										<div class="col-sm-2">
-											<input type="text" class="col-xs-12" name="bookName"
-												value="${bookInfo.bookName }">
+											<input type="text" class="col-xs-12" name="studentName"
+												value="${studentInfo.studentName }">
 										</div>
-
+										
+										<label class="col-sm-1 text-right">性别</label>
+										<div class="col-sm-2">
+										  <select class="col-xs-12" name="studentSex">
+										    <option value=" ">全部</option>
+											<c:forEach items="${sexs}" var="sex" varStatus="status">
+											  <option value="${sex.itemno}">${sex.itemname}</option>
+											</c:forEach>
+										  </select>
+										</div>
+										
+										<label class="col-sm-1 text-right">手机号</label> 
+										<div class="col-sm-2">
+											<input type="text" class="form-control input-sm" name="mobile" value="${studentInfo.mobile }">
+										</div> 
+										<label class="col-sm-1 text-right">年级</label> 
+										<div class="col-sm-2">
+											 <select class="col-xs-12" name="studentGrade">
+											    <option value=" ">全部</option>
+												<c:forEach items="${grades}" var="grade" varStatus="status">
+												  <option value="${grade.itemno}">${grade.itemname}</option>
+												</c:forEach>
+											  </select>
+										</div>
+										
+										<label class="col-sm-1 text-right">学院</label> 
+										<div class="col-sm-2">
+											 <select name="collegeId" id="collegeId">
+								            <select>
+										</div>
+										<label class="col-sm-1 text-right">专业</label> 
+										<div class="col-sm-2">
+											 <select name="specialtyId" id="specialtyId">
+								            <select>
+										</div>
+										<label class="col-sm-1 text-right">班级</label> 
+										<div class="col-sm-2">
+											 <select name="classId" id="classId">
+								            <select>
+										</div>
+										
+										<div class="col-xs-12">
+											<div class="col-sm-1">
+												<input type="button" id="students" value="查 询" />
+											</div>
+											<div class="col-sm-1">
+												<input type="button" id="studentaddbatch" value="导入" />
+											</div>
+											<div class="col-sm-1">
+												<input type="button" id="studentexport" value="导出" />
+											</div>
+										</div>
+										
 										<div class="col-sm-4">
 											<div id="dynamic-table_filter" class="dataTables_filter">
-												<a href="add">
+												<a href="studentadd">
 													<button type="button" class="btn btn-success btn-sm">
 														<span class="icon-plus"></span>&nbsp;&nbsp;新增
 													</button>
 												</a>&nbsp;&nbsp; <a
-													href="javascript:batchDelete('deleteteachers')">
+													href="studentsdel">
 													<button class="btn btn-danger btn-sm">
 														<span class="icon-trash"></span>&nbsp;&nbsp;删除
 													</button>
 												</a>
-											</div>
-										</div>
-										
-										<div class="col-xs-12">
-											<label class="col-sm-1 contorl-label text-right">出版社</label> 
-											<div class="col-sm-2">
-												<input type="text" class="form-control input-sm" name="bookPublish" value="${bookInfo.bookPublish }">
-											</div> 
-											<label class="col-sm-1 text-right">作者</label> 
-											<div class="col-sm-2">
-												<input type="text" class="form-control input-sm" name="bookAuthor"
-													value="${bookInfo.bookAuthor }">
-											</div>
-											
-											<div class="col-sm-1">
-												<input type="button" id="books" value="查 询" />
-											</div>
-											<div class="col-sm-1">
-												<input type="button" id="bookexport" value="导出" />
 											</div>
 										</div>
 									</div>
@@ -129,34 +161,46 @@
 													<th class="center"><input type="checkbox" id="all"
 														onclick="selectAll('studentId')" /></th>
 													<th>序号</th>
-													<th>ISBN号</th>
-													<th>书名</th>
-													<th>出版社</th>
-													<th>作者</th>
-													<th>价格</th>
+													<th>学号</th>
+													<th>姓名</th>
+													<th>性别</th>
+													<th>手机号</th>
+													<th>年级</th>
+													<th>班级</th>
+													<th>专业</th>
+													<th>学院</th>
+													<th>入学时间</th>
+													<th>支付状态</th>
+													<th>初始支付金额</th>
 													<th>操作</th>
 												</tr>
 											</thead>
 
 											<tbody>
-												<c:forEach items="${books}" var="book" varStatus="status">
+												<c:forEach items="${students}" var="student" varStatus="status">
 													<tr>
 														<td class="center"><input type="checkbox"
-															name="bookId" value="${book.id}" /></td>
+															name="id" value="${student.id}" /></td>
 														<td>${status.index + 1}</td>
-														<td>${book.bookIsbn}</td>
-														<td>${book.bookName}</td>
-														<td>${book.bookPublish}</td>
-														<td>${book.bookAuthor}</td>
-														<td>${book.bookPrice}</td>
+														<td>${student.studentNo}</td>
+														<td>${student.studentName}</td>
+														<td><code:itemname codeno="SEX" itemno="${student.studentSex }"></code:itemname></td>
+														<td>${student.mobile}</td>
+														<td><code:itemname codeno="GRADE" itemno="${student.studentGrade}"></code:itemname></td>
+														<td><location:className classId="${student.classId}"></location:className> </td>
+														<td><location:specialtyName specialtyId=" ${student.specialtyId}"></location:specialtyName></td>
+														<td><location:collegeName collegeId="${student.collegeId}" ></location:collegeName></td>
+														<td><fmt:formatDate value="${student.enterTime}" pattern="yyyy-MM-dd"/></td>
+														<td>${student.payStatus}</td>
+														<td>${student.initialAmount}</td>
 														<td>
 															<div class="hidden-sm hidden-xs action-buttons">
 																<a class="blue" href="#"> <i
 																	class="ace-icon fa fa-search-plus bigger-130"></i>
-																</a> <a class="green" href="${book.id}/update"> <i
-																	class="ace-icon fa fa-pencil bigger-130"></i>
-																</a> <a class="red" href="${book.id}/delete"> <i
-																	class="ace-icon fa fa-trash-o bigger-130"></i>
+																</a> <a class="green" href="${student.id}/studentedit">修改 <i
+																	class="icon-edit"></i>
+																</a> <a class="red" href="${student.id}/studentdel">删除 <i
+																	class="icon-trash"></i>
 																</a>
 															</div>
 														</td>
@@ -220,6 +264,7 @@
 	<!-- /.main-container -->
 
 	<%@ include file="../common/common-js.jsp"%>
+	<script src="<%=basePath2 %>resources/js/common/common_list.js"></script>
 </body>
 </html>
 

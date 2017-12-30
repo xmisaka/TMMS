@@ -58,7 +58,7 @@
 
 									<i class="icon-ok green"></i>
 
-									欢迎使用
+									 你好,<%=user.getUsername() %>,欢迎使用
 									<strong class="green">
 										教材管理系统
 										<small>(v1.0)</small>
@@ -67,7 +67,6 @@
 								</div>
 
 									<div class="col-sm-12">
-										<iframe scrolling="no" frameborder="0" src="main.jsp" name="mainiframe"></iframe>
 									</div><!-- /span -->
 									
 								<!-- PAGE CONTENT ENDS -->

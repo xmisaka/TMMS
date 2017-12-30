@@ -13,6 +13,17 @@
   <sql id="Base_Column_List" >
     id, username, password, role_id, state, create_time, update_time
   </sql>
+  <select id="getByUserName" parameterType="String" resultMap="BaseResultMap">
+		select * from tmms_user where username=#{username}
+	</select>
+	
+	<select id="getRoles" parameterType="String" resultType="String">
+		select r.role_name from tmms_user u,user_role r where u.role_id=r.id and u.username=#{username}
+	</select>
+	
+	<select id="getPermissions" parameterType="String" resultType="String">
+		select p.permission_id from tmms_user u,user_role r,role_permission p where u.role_id=r.id and p.role_id=r.id and u.username=#{username}
+	</select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -24,23 +35,19 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="entity.TmmsUser" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into tmms_user (id, username, password, 
+    insert into tmms_user (username, password, 
       role_id, state, create_time, 
       update_time)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{roleId,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="entity.TmmsUser" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into tmms_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      id,
+      <if test="id != null" >
+        id,
+      </if>
       <if test="username != null" >
         username,
       </if>
@@ -61,7 +68,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{id,jdbcType=INTEGER},
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
       </if>
@@ -116,4 +125,67 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+<!-- 一下为自定义方法 -->
+  <select id="listTmmsUser" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from tmms_user
+  	<where>
+  		<if test="tmmsUser.username != null and !&quot;&quot;.equals(tmmsUser.username.trim())">
+  			and username = #{tmmsUser.username}
+  		</if>
+  		<if test="tmmsUser.roleId != null">
+  			and role_id = #{tmmsUser.roleId}
+  		</if>
+  		<if test="tmmsUser.state != null and !&quot;&quot;.equals(tmmsUser.state.trim())">
+  			and state = #{tmmsUser.state}
+  		</if>
+  	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
+  	
+  </select>
+  
+  <select id="countTmmsUser" resultType="int" parameterType="entity.TmmsUser">
+  	select count(*) from tmms_user
+  	<where>
+  		<if test="username != null and !&quot;&quot;.equals(username.trim())">
+  			and username = #{username}
+  		</if>
+  		<if test="roleId != null ">
+  			and role_id = #{roleId}
+  		</if>
+  		<if test="state != null and !&quot;&quot;.equals(state.trim())">
+  			and state = #{state}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="selectByParams" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from tmms_user
+  	<where>
+  		<if test="tmmsUser.username != null and !&quot;&quot;.equals(tmmsUser.username.trim())">
+  			and username = #{tmmsUser.username}
+  		</if>
+  		<if test="tmmsUser.roleId != null and !&quot;&quot;.equals(tmmsUser.roleId.trim())">
+  			and role_id = #{tmmsUser.roleId}
+  		</if>
+  		<if test="tmmsUser.state != null and !&quot;&quot;.equals(tmmsUser.state.trim())">
+  			and state = #{tmmsUser.state}
+  		</if>
+  	</where>
+  </select>
+  
+  <insert id="insertTmmsUserBatch" parameterType="java.util.List">
+		  insert into tmms_user (username,password,role_id,state,create_time,update_time)
+		        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.username,jdbcType=VARCHAR},
+             #{item.password,jdbcType=VARCHAR},
+             #{item.state,jdbcType=TINYINT},
+             #{item.createTime,jdbcType=TIMESTAMP},
+             #{item.updateTime,jdbcType=TIMESTAMP}
+             )
+        </foreach>
+  </insert>
 </mapper>

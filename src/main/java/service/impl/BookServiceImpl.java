@@ -20,6 +20,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import dao.BookInfoMapper;
@@ -40,6 +41,7 @@ public class BookServiceImpl implements BookService {
 	 * @param page
 	 * @return
 	 */
+	@Cacheable(value="userCache")
 	@Override
 	public List<BookInfo> listBook(BookInfo bookInfo, Page page) {
 		int totalNumber = bookInfoMapper.countBook(bookInfo);
@@ -51,6 +53,7 @@ public class BookServiceImpl implements BookService {
 	 * 批量导入书籍信息
 	 * @param file
 	 */
+	@Cacheable(value="userCache")
 	@Override
 	public void uploadBook(File file) {
 		// TODO Auto-generated method stub
@@ -198,6 +201,7 @@ public class BookServiceImpl implements BookService {
 	 * 按条件查询书籍信息
 	 * @param bookInfo
 	 */
+	@Cacheable(value="userCache")
 	@Override
 	public List<BookInfo> selectByParams(BookInfo bookInfo){
 		return bookInfoMapper.selectByParams(bookInfo);
@@ -232,6 +236,7 @@ public class BookServiceImpl implements BookService {
 	 * 添加一本书籍
 	 * @param bookInfo
 	 */
+	@Cacheable(value="userCache")
 	@Override
 	public int insertBook(BookInfo bookInfo) {
 		// TODO Auto-generated method stub

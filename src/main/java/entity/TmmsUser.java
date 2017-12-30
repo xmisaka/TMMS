@@ -2,6 +2,8 @@ package entity;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class TmmsUser {
     private Integer id;
 
@@ -24,7 +26,7 @@ public class TmmsUser {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    @NotEmpty(message="用户名不能为空")
     public String getUsername() {
         return username;
     }
@@ -32,7 +34,7 @@ public class TmmsUser {
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
     }
-
+    @NotEmpty(message="密码不能为空")
     public String getPassword() {
         return password;
     }

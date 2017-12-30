@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+  "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+ <tlib-version>1.0</tlib-version>
+ <jsp-version>1.2</jsp-version>
+ <short-name>location</short-name>  
+ <uri>/location-tags</uri> 
+ <!--OutputTag-->
+ <!-- 得到院系名 -->
+ <tag>
+	  <name>collegeName</name>
+	  <tag-class>tags.CollegeTag</tag-class>
+	  <body-content>JSP</body-content>
+	  <attribute>
+	  	<name>collegeId</name>
+	  	<rtexprvalue>true</rtexprvalue>
+	  	<description>学院ID</description>
+	  </attribute>
+ </tag>
+  <!-- 得到专业名 -->
+ <tag>
+	  <name>specialtyName</name>
+	  <tag-class>tags.SpecialtyTag</tag-class>
+	  <body-content>JSP</body-content>
+	  <attribute>
+	  	<name>specialtyId</name>
+	  	<rtexprvalue>true</rtexprvalue>
+	  	<description>专业ID</description>
+	  </attribute>
+ </tag>
+  <!-- 得到班级名 -->
+ <tag>
+	  <name>className</name>
+	  <tag-class>tags.ClassTag</tag-class>
+	  <body-content>JSP</body-content>
+	  <attribute>
+	  	<name>classId</name>
+	  	<rtexprvalue>true</rtexprvalue>
+	  	<description>班级ID</description>
+	  </attribute>
+ </tag>
+</taglib>
+

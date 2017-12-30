@@ -86,7 +86,12 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-
+        <dependency>
+        	<groupId>javax.servlet.jsp</groupId>
+        	<artifactId>jsp-api</artifactId>
+        	<version>2.2</version>
+        	<scope>provided</scope>
+        </dependency>
 		<!--4:spring依赖 -->
 		<!--1)spring核心依赖 -->
 		<dependency>
@@ -102,6 +107,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+			<version>4.1.7.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
 			<version>4.1.7.RELEASE</version>
 		</dependency>
 		<!--2)spring dao层依赖 -->
@@ -132,7 +142,13 @@
 			<artifactId>spring-test</artifactId>
 			<version>4.1.7.RELEASE</version>
 		</dependency>
-
+        <!-- ehcache缓存管理相关包 -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.10.2</version>
+			<type>pom</type>
+		</dependency>
 		<!-- shiro相关依赖 -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -212,6 +228,11 @@
 		    <artifactId>json-lib</artifactId>  
 		    <version>2.4</version>  
 		    <classifier>jdk15</classifier>  
+		</dependency>
+		<dependency>
+        <groupId>org.jsoup</groupId>
+		    <artifactId>jsoup</artifactId>
+		    <version>1.7.3</version>
 		</dependency>
 	<!-- 引入定时器quartz依赖包 -->
         <dependency>

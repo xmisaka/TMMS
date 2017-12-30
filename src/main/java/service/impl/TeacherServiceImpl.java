@@ -35,7 +35,7 @@ public class TeacherServiceImpl implements TeacherService {
 	@Autowired
 	TeacherInfoMapper teacherInfoMapper;
 	/**
-	 * 根据输入信息条件查询教师列表，并分页显示
+	 * 根据输入信息条件查询教师信息列表，并分页显示
 	 * @param teacherInfo
 	 * @param page
 	 * @return
@@ -48,7 +48,7 @@ public class TeacherServiceImpl implements TeacherService {
 		return teachers;
 	}
 	/**
-	 * 批量导入教师信息
+	 * 批量导入教师信息信息
 	 * @param file
 	 
 	@Override
@@ -170,11 +170,11 @@ public class TeacherServiceImpl implements TeacherService {
 			fieldMap.put("教师职工号", "teacherNo");
 			fieldMap.put("教师名字", "teacherName");
 			fieldMap.put("性别", "teacherSex");
-			fieldMap.put("手机号", "moblie");
+			fieldMap.put("手机号", "mobile");
 			fieldMap.put("院系", "collegeId");
 			fieldMap.put("职称", "technicalTitle");
 			fieldMap.put("状态", "state");
-			String uniqueFields[]={"教师职工号"};
+			String uniqueFields[]={"教师信息职工号"};
 			list=JxlExcelUtil.excelToList(in, "Sheet1", TeacherInfo.class, fieldMap, uniqueFields);
 			
 		} catch (FileNotFoundException e) {
@@ -195,7 +195,7 @@ public class TeacherServiceImpl implements TeacherService {
 		}
 	}
 	/**
-	 * 按条件查询教师信息
+	 * 按条件查询教师信息信息
 	 * @param teacherInfo
 	 */
 	@Override
@@ -203,7 +203,7 @@ public class TeacherServiceImpl implements TeacherService {
 		return teacherInfoMapper.selectByParams(teacherInfo);
 	}
 	/**
-	 * 批量导出教师信息
+	 * 批量导出教师信息信息
 	 * @param list
 	 * @param response
 	 */
@@ -214,21 +214,21 @@ public class TeacherServiceImpl implements TeacherService {
 		fieldMap.put("teacherNo", "教师职工号");
 		fieldMap.put("teacherName", "教师名字");
 		fieldMap.put("teacherSex", "性别");
-		fieldMap.put("moblie", "手机号");
+		fieldMap.put("mobile", "手机号");
 		fieldMap.put("collegeId", "院系");
 		fieldMap.put("technicalTitle", "职称");
 		fieldMap.put("state", "状态");
 		fieldMap.put("createTime", "创建时间");
 		fieldMap.put("updateTime", "更新时间");
 		try {
-			JxlExcelUtil.listToExcel(list, fieldMap, "教师信息", response);
+			JxlExcelUtil.listToExcel(list, fieldMap, "教师信息信息", response);
 		} catch (ExcelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	/**
-	 * 添加一本教师
+	 * 添加一位教师信息
 	 * @param teacherInfo
 	 */
 	@Override
@@ -238,17 +238,17 @@ public class TeacherServiceImpl implements TeacherService {
 
 	}
 	/**
-	 * 修改一本教师
+	 * 修改一位教师信息
 	 * @param teacherInfo
 	 */
     @Override
     public int editTeacher(TeacherInfo teacherInfo) {
     	// TODO Auto-generated method stub
-    	return teacherInfoMapper.updateByPrimaryKey(teacherInfo);
+    	return teacherInfoMapper.updateByPrimaryKeySelective(teacherInfo);
     }
 
 	/**
-	 * 删除一本教师
+	 * 删除一位教师信息
 	 * @param id
 	 */
 	@Override
@@ -257,7 +257,7 @@ public class TeacherServiceImpl implements TeacherService {
 		return teacherInfoMapper.deleteByPrimaryKey(id);
 	}
 	/**
-	 * 批量删除教师
+	 * 批量删除教师信息
 	 * @param ids
 	 */
 	@Override

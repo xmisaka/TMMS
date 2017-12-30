@@ -2,12 +2,14 @@ package entity;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class RolePermission {
     private Integer id;
 
     private Long roleId;
 
-    private Long permissionId;
+    private Integer permissionId;
 
     private Date createTime;
 
@@ -24,7 +26,7 @@ public class RolePermission {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    @NotEmpty(message="角色不能为空")
     public Long getRoleId() {
         return roleId;
     }
@@ -32,12 +34,12 @@ public class RolePermission {
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
-
-    public Long getPermissionId() {
+    @NotEmpty(message="权限不能为空")
+    public Integer getPermissionId() {
         return permissionId;
     }
 
-    public void setPermissionId(Long permissionId) {
+    public void setPermissionId(Integer permissionId) {
         this.permissionId = permissionId;
     }
 

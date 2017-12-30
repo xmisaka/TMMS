@@ -7,8 +7,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-		            classpath:spring.xml
-		            <!-- classpath:spring-shiro.xml -->
+		            classpath:spring.xml,
+		            classpath:spring-shiro.xml
 		</param-value>
 	</context-param>
 
@@ -47,11 +47,11 @@
 	</filter-mapping>
 
 	<!-- shiro过滤器定义 -->
-	<!-- <filter>
+	 <filter>
 		<filter-name>shiroFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 		<init-param>
-			该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理
+			<!-- 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理 -->
 			<param-name>targetFilterLifecycle</param-name>
 			<param-value>true</param-value>
 		</init-param>
@@ -59,7 +59,7 @@
 	<filter-mapping>
 		<filter-name>shiroFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+	</filter-mapping> 
 
 
 	<!-- 配置spring容器监听器 -->
@@ -71,11 +71,8 @@
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
 
-	
-
-	<!-- 
 	<welcome-file-list>
-		<welcome-file>/user/index.shtml</welcome-file>
+		<welcome-file>/index.jsp</welcome-file>
 	</welcome-file-list>
 	<error-page>
 		<error-code>404</error-code>
@@ -85,9 +82,24 @@
 		<error-code>500</error-code>
 		<location>/open/404.shtml</location>
 	</error-page> 
-	-->
 	<!-- 配置session超时时间，单位分钟 -->
 	<session-config>
 		<session-timeout>900</session-timeout>
 	</session-config>
+	
+	<!-- 自定义标签 -->
+	<jsp-config>
+		<taglib>
+			<taglib-uri>/WEB-INF/tld/code.tld</taglib-uri>
+			<taglib-location>/code-tags</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/tld/location.tld</taglib-uri>
+			<taglib-location>/location-tags</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/tld/menu.tld</taglib-uri>
+			<taglib-location>/menu-tags</taglib-location>
+		</taglib>
+    </jsp-config>
 </web-app>

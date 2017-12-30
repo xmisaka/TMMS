@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ClassInfoMapper" >
+  <resultMap id="BaseResultMap" type="entity.ClassInfo" >
+    <id column="class_id" property="classId" jdbcType="VARCHAR" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="class_pwd" property="classPwd" jdbcType="VARCHAR" />
+    <result column="college_id" property="collegeId" jdbcType="VARCHAR" />
+    <result column="specialty_id" property="specialtyId" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="VARCHAR" />
+    <result column="monitor_no" property="monitorNo" jdbcType="VARCHAR" />
+    <result column="monitor_name" property="monitorName" jdbcType="VARCHAR" />
+    <result column="monitor_linkinfo" property="monitorLinkinfo" jdbcType="VARCHAR" />
+    <result column="student_num" property="studentNum" jdbcType="INTEGER" />
+    <result column="paid_student_num" property="paidStudentNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="extend1" property="extend1" jdbcType="VARCHAR" />
+    <result column="extend2" property="extend2" jdbcType="VARCHAR" />
+    <result column="extend3" property="extend3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    class_id, class_name, class_pwd, college_id, specialty_id, grade, monitor_no, monitor_name, 
+    monitor_linkinfo, student_num, paid_student_num, create_time, update_time, extend1, 
+    extend2, extend3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from class_info
+    where class_id = #{classId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from class_info
+    where class_id = #{classId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="entity.ClassInfo" >
+    insert into class_info (class_id, class_name, class_pwd, 
+      college_id, specialty_id, grade, 
+      monitor_no, monitor_name, monitor_linkinfo, 
+      student_num, paid_student_num, create_time, 
+      update_time, extend1, extend2, 
+      extend3)
+    values (#{classId,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{classPwd,jdbcType=VARCHAR}, 
+      #{collegeId,jdbcType=VARCHAR}, #{specialtyId,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, 
+      #{monitorNo,jdbcType=VARCHAR}, #{monitorName,jdbcType=VARCHAR}, #{monitorLinkinfo,jdbcType=VARCHAR}, 
+      #{studentNum,jdbcType=INTEGER}, #{paidStudentNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{extend1,jdbcType=VARCHAR}, #{extend2,jdbcType=VARCHAR}, 
+      #{extend3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.ClassInfo" >
+    insert into class_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classId != null" >
+        class_id,
+      </if>
+      <if test="className != null" >
+        class_name,
+      </if>
+      <if test="classPwd != null" >
+        class_pwd,
+      </if>
+      <if test="collegeId != null" >
+        college_id,
+      </if>
+      <if test="specialtyId != null" >
+        specialty_id,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="monitorNo != null" >
+        monitor_no,
+      </if>
+      <if test="monitorName != null" >
+        monitor_name,
+      </if>
+      <if test="monitorLinkinfo != null" >
+        monitor_linkinfo,
+      </if>
+      <if test="studentNum != null" >
+        student_num,
+      </if>
+      <if test="paidStudentNum != null" >
+        paid_student_num,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="extend1 != null" >
+        extend1,
+      </if>
+      <if test="extend2 != null" >
+        extend2,
+      </if>
+      <if test="extend3 != null" >
+        extend3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classId != null" >
+        #{classId,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classPwd != null" >
+        #{classPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null" >
+        #{collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="specialtyId != null" >
+        #{specialtyId,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorNo != null" >
+        #{monitorNo,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorName != null" >
+        #{monitorName,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorLinkinfo != null" >
+        #{monitorLinkinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNum != null" >
+        #{studentNum,jdbcType=INTEGER},
+      </if>
+      <if test="paidStudentNum != null" >
+        #{paidStudentNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend1 != null" >
+        #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null" >
+        #{extend3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.ClassInfo" >
+    update class_info
+    <set >
+      <if test="className != null" >
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classPwd != null" >
+        class_pwd = #{classPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null" >
+        college_id = #{collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="specialtyId != null" >
+        specialty_id = #{specialtyId,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorNo != null" >
+        monitor_no = #{monitorNo,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorName != null" >
+        monitor_name = #{monitorName,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorLinkinfo != null" >
+        monitor_linkinfo = #{monitorLinkinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNum != null" >
+        student_num = #{studentNum,jdbcType=INTEGER},
+      </if>
+      <if test="paidStudentNum != null" >
+        paid_student_num = #{paidStudentNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend1 != null" >
+        extend1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        extend2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null" >
+        extend3 = #{extend3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where class_id = #{classId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.ClassInfo" >
+    update class_info
+    set class_name = #{className,jdbcType=VARCHAR},
+      class_pwd = #{classPwd,jdbcType=VARCHAR},
+      college_id = #{collegeId,jdbcType=VARCHAR},
+      specialty_id = #{specialtyId,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      monitor_no = #{monitorNo,jdbcType=VARCHAR},
+      monitor_name = #{monitorName,jdbcType=VARCHAR},
+      monitor_linkinfo = #{monitorLinkinfo,jdbcType=VARCHAR},
+      student_num = #{studentNum,jdbcType=INTEGER},
+      paid_student_num = #{paidStudentNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      extend1 = #{extend1,jdbcType=VARCHAR},
+      extend2 = #{extend2,jdbcType=VARCHAR},
+      extend3 = #{extend3,jdbcType=VARCHAR}
+    where class_id = #{classId,jdbcType=VARCHAR}
+  </update>
+ <!-- 一下为自定义方法 -->
+  <select id="listClass" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from class_info
+  	<where>
+  		<if test="classInfo.className != null and !&quot;&quot;.equals(classInfo.className.trim())">
+  			and class_name = #{classInfo.className}
+  		</if>
+  		<if test="classInfo.collegeId != null and !&quot;&quot;.equals(classInfo.collegeId.trim())">
+  			and college_id = #{classInfo.collegeId}
+  		</if>
+  		<if test="classInfo.specialtyId != null and !&quot;&quot;.equals(classInfo.specialtyId.trim())">
+  			and specialty_id = #{classInfo.specialtyId}
+  		</if>
+  		<if test="classInfo.grade != null and !&quot;&quot;.equals(classInfo.grade.trim())">
+  			and grade = #{classInfo.grade}
+  		</if>
+  	</where>order by class_id limit #{page.dbIndex},#{page.dbNumber}
+  	
+  </select>
+  
+  <select id="selectByParams" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from class_info
+  	<where>
+  		<if test="classInfo.className != null and !&quot;&quot;.equals(classInfo.className.trim())">
+  			and class_name = #{classInfo.className}
+  		</if>
+  		<if test="classInfo.collegeId != null and !&quot;&quot;.equals(classInfo.collegeId.trim())">
+  			and college_id = #{classInfo.collegeId}
+  		</if>
+  		<if test="classInfo.specialtyId != null and !&quot;&quot;.equals(classInfo.specialtyId.trim())">
+  			and specialty_id = #{classInfo.specialtyId}
+  		</if>
+  		<if test="classInfo.grade != null and !&quot;&quot;.equals(classInfo.grade.trim())">
+  			and grade = #{classInfo.grade}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="countClass" resultType="int" parameterType="entity.ClassInfo">
+  	select count(*) from class_info
+  	<where>
+  		<if test="className != null and !&quot;&quot;.equals(className.trim())">
+  			and class_name = #{className}
+  		</if>
+  		<if test="collegeId != null and !&quot;&quot;.equals(collegeId.trim())">
+  			and college_id = #{collegeId}
+  		</if>
+  		<if test="specialtyId != null and !&quot;&quot;.equals(specialtyId.trim())">
+  			and specialty_id = #{specialtyId}
+  		</if>
+  		<if test="grade != null and !&quot;&quot;.equals(grade.trim())">
+  			and grade = #{grade}
+  		</if>
+  	</where>
+  </select>
+  
+  <insert id="insertClassBatch" parameterType="java.util.List">
+		  insert into class_info (class_id,class_name,class_pwd,college_id,specialty_id,grade,monitor_no,monitor_name,monitor_linkinfo,student_num,paid_student_num,create_time,update_time)
+		        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.classId,jdbcType=VARCHAR},
+             #{item.className,jdbcType=VARCHAR},
+             #{item.classPwd,jdbcType=VARCHAR},
+             #{item.collegeId,jdbcType=VARCHAR},
+             #{item.specialtyId,jdbcType=VARCHAR},
+             #{item.grade,jdbcType=VARCHAR},
+             #{item.monitorNo,jdbcType=VARCHAR},
+             #{item.monitorName,jdbcType=VARCHAR},
+             #{item.monitorLinkinfo,jdbcType=VARCHAR},
+             #{item.studentNum,jdbcType=INTEGER},
+             #{item.paidStudentNum,jdbcType=INTEGER},
+             #{item.createTime,jdbcType=TIMESTAMP},
+             #{item.updateTime,jdbcType=TIMESTAMP}
+             )
+        </foreach>
+  </insert>
+  <select id="selectBySpecialtyId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from class_info
+    where specialty_id = #{specialtyId,jdbcType=VARCHAR}
+  </select>
+</mapper>

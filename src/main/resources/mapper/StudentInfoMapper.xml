@@ -41,14 +41,14 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into student_info (id, student_no, student_name, 
+    insert into student_info (student_no, student_name, 
       student_sex, mobile, student_pwd, 
       student_grade, class_id, specialty_id, 
       college_id, enter_time, pay_status, 
       initial_amount, state, create_time, 
       update_time, extend1, extend2, 
       extend3)
-    values (#{id,jdbcType=INTEGER}, #{studentNo,jdbcType=VARCHAR}, #{studentName,jdbcType=VARCHAR}, 
+    values (#{studentNo,jdbcType=VARCHAR}, #{studentName,jdbcType=VARCHAR}, 
       #{studentSex,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{studentPwd,jdbcType=VARCHAR}, 
       #{studentGrade,jdbcType=VARCHAR}, #{classId,jdbcType=VARCHAR}, #{specialtyId,jdbcType=VARCHAR}, 
       #{collegeId,jdbcType=VARCHAR}, #{enterTime,jdbcType=TIMESTAMP}, #{payStatus,jdbcType=VARCHAR}, 
@@ -62,7 +62,6 @@
     </selectKey>
     insert into student_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      id,
       <if test="studentNo != null" >
         student_no,
       </if>
@@ -119,7 +118,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{id,jdbcType=INTEGER},
       <if test="studentNo != null" >
         #{studentNo,jdbcType=VARCHAR},
       </if>
@@ -345,7 +343,7 @@
   		<if test="studentInfo.state != null and !&quot;&quot;.equals(studentInfo.state.trim())">
   			and state = #{studentInfo.state}
   		</if>
-  	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
+  	</where>
   </select>
   
   <select id="countStudent" resultType="int" parameterType="entity.StudentInfo">

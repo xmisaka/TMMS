@@ -2,6 +2,8 @@ package entity;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class UserRole {
     private Long id;
 
@@ -26,7 +28,7 @@ public class UserRole {
     public void setId(Long id) {
         this.id = id;
     }
-
+    @NotEmpty(message="角色不能为空")
     public String getRoleName() {
         return roleName;
     }

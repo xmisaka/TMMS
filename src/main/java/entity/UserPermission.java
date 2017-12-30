@@ -2,6 +2,8 @@ package entity;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class UserPermission {
     private Integer id;
 
@@ -24,7 +26,7 @@ public class UserPermission {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    @NotEmpty(message="权限不能为空")
     public String getPermissionName() {
         return permissionName;
     }

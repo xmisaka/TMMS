@@ -3,7 +3,12 @@ package entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class StudentInfo {
     private Integer id;
@@ -25,7 +30,8 @@ public class StudentInfo {
     private String specialtyId;
 
     private String collegeId;
-
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date enterTime;
 
     private String payStatus;
@@ -76,6 +82,7 @@ public class StudentInfo {
         this.studentSex = studentSex == null ? null : studentSex.trim();
     }
     @NotEmpty(message="手机号不能为空")
+    @Pattern(regexp="^1[3|4|5|7|8][0-9]{9}$",message="手机号格式不正确")
     public String getMobile() {
         return mobile;
     }
@@ -123,11 +130,11 @@ public class StudentInfo {
     public void setCollegeId(String collegeId) {
         this.collegeId = collegeId == null ? null : collegeId.trim();
     }
-    @NotEmpty(message="入学时间不能为空")
+    @NotNull(message="入学时间不能为空")
     public Date getEnterTime() {
         return enterTime;
     }
-
+   
     public void setEnterTime(Date enterTime) {
         this.enterTime = enterTime;
     }
@@ -139,7 +146,8 @@ public class StudentInfo {
     public void setPayStatus(String payStatus) {
         this.payStatus = payStatus == null ? null : payStatus.trim();
     }
-    @NotEmpty(message="初始缴费金额")
+    @NotNull(message="初始缴费金额不能为空")
+    @DecimalMin("0")
     public BigDecimal getInitialAmount() {
         return initialAmount;
     }

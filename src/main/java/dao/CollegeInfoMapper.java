@@ -22,9 +22,11 @@ public interface CollegeInfoMapper {
     // 下面为自定义方法
  	List<CollegeInfo> listCollege(@Param("collegeInfo") CollegeInfo collegeInfo, @Param("page") Page page);
  	//按条件查询院系信息
-    List<CollegeInfo> selectByParams(@Param("bookInfo") CollegeInfo bookInfo);
+    List<CollegeInfo> selectByParams(@Param("collegeInfo") CollegeInfo collegeInfo);
     
  	int countCollege(CollegeInfo collegeInfo);
  	//批量插入院系信息
  	void insertCollegeBatch(List<CollegeInfo> list);
+ 	//查询全部
+ 	List<CollegeInfo> selectAll();
 }

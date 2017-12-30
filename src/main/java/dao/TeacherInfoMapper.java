@@ -26,7 +26,7 @@ public interface TeacherInfoMapper {
  	//按条件查询教师信息
  	List<TeacherInfo> selectByParams(@Param("teacherInfo") TeacherInfo teacherInfo);
  	
- 	int countTeacher(TeacherInfo bookInfo);
+ 	int countTeacher(TeacherInfo teacherInfo);
  	//批量插入教师信息
  	void insertTeacherBatch(List<TeacherInfo> list);
 }
